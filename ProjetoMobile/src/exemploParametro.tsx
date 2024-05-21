@@ -1,15 +1,17 @@
 import React from 'react';
-import { Text } from 'react-native';
+import {Text} from 'react-native';
 
 type Props = {
-    nome: string;
+    nome:string;
     sobrenome: string;
 }
-const NomePersonalizado = (props: Props) =>{
-    return (
-    <Text style={{fontSize: 40, color: 'blueviolet'}}>
+
+const NomePersonalizado = (props: Props) => {
+  return (
+    <Text style={{fontSize: 40, color: 'red'}}>
         {props.nome + ' ' + props.sobrenome}
-    </Text>)
+    </Text>
+  )
 };
 
 export default NomePersonalizado;

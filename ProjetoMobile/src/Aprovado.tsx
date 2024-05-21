@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-
 type Props = {
     nome: string;
     nota1: number;
