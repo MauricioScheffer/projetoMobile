@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert } from 'react-native';
 
 import auth from "@react-native-firebase/auth";
+import { LoginProps } from './Screen';
 
-const Login = () => {
+const TelaLogin = ({ navigation, route }: LoginProps) => {
     const [email, setEmail] = useState(''); 
     const [senha, setSenha] = useState(''); 
 
@@ -58,7 +59,7 @@ const Login = () => {
                 </Text>
                 <TextInput
                     style={styles.caixa_texto}
-                    onChangeText={(text) => {setEmail(text)}}/>
+                    onChangeText={(text) => {setEmail(text)}} placeholder='Email'/>
 
                 <Text
                     style={styles.titulo_caixa_texto}>
@@ -66,19 +67,25 @@ const Login = () => {
                 </Text>
                 <TextInput
                     style={styles.caixa_texto} 
-                    onChangeText={(text) => {setSenha(text)}}/>
+                    onChangeText={(text) => {setSenha(text)}} placeholder='Senha'/>
 
                 <Pressable
                     style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={logar}>
                     <Text style={styles.desc_botao}>Entrar</Text>
                 </Pressable>
+
+                <Pressable
+                    style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('Cadastro')}}>
+                    <Text style={styles.desc_botao}>Cadastrar-se</Text>
+                </Pressable>
             </View>
         </View>
     );
 }
 
-export default Login;
+export default TelaLogin;
 
 const styles = StyleSheet.create({
     container: {
@@ -90,6 +97,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     titulo_caixa_texto:{
+        fontFamily: 'Cochin',
+        fontWeight: 'thin',
         fontSize: 25,
         color: 'black'
     },

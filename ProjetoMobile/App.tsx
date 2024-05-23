@@ -1,16 +1,13 @@
-import React from 'react';
-import { View } from 'react-native';
-import Login from './src/TelaLogin.tsx';
-import Atividade from './src/Exec1.tsx';
-import Imagem from './src/Exec2.tsx';
-import Number3 from './src/Exec3.tsx';
-import Titulo from './src/Exec1.tsx'
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import {} from 'react-native';
+import  HomeNavigator  from './src/Screen.tsx';
+// import Cad from './Cad';
 
-function App(): React.JSX.Element {
+export default function App() {
   return (
-    <Titulo titulo={''}/>
+    <NavigationContainer>
+       <HomeNavigator/>
+    </NavigationContainer>
   );
 }
-
-
-export default App;
