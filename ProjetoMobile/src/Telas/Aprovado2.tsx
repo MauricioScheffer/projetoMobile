@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, Pressable, StyleSheet, Text, TextInput } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { AprovadoProps } from '../navigation/Screen.tsx';
 
-const Aprovado = () => {
+const Aprovado = ({navigation,route}: AprovadoProps) => {
     const [nome, setNome] = useState('');
     const [nota1, setNota1] = useState(0);
     const [nota2, setNota2] = useState(0);
@@ -29,22 +30,22 @@ const Aprovado = () => {
     }
 
     return (
-        <>
-            <Text style={{ fontSize: 40 }}>
+        <View style={styles.container}>
+            <Text style={{ fontSize: 30, color: '#000' }}>
                 Nome:
             </Text>
             <TextInput
                 style={styles.caixa_texto}
                 onChangeText={(text) => { setNome(text) }} />
 
-            <Text style={{ fontSize: 30 }}>
+            <Text style={{ fontSize: 30, color: '#000' }}>
                 Nota 1:
             </Text>
             <TextInput
                 style={styles.caixa_texto}
                 onChangeText={(text) => { setNota1(Number.parseFloat(text)) }} />
 
-            <Text style={{ fontSize: 30 }}>
+            <Text style={{ fontSize: 30, color: '#000' }}>
                 Nota 2:
             </Text>
             <TextInput
@@ -56,7 +57,7 @@ const Aprovado = () => {
                 onPress={calcular}>
                 <Text style={styles.desc_botao}>Calcular</Text>
             </Pressable>
-        </>
+        </View>
     )
 };
 
@@ -68,8 +69,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFACD'
     },
     container_login: {
-        flex: 2,
-        alignItems: 'center'
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     titulo_caixa_texto: {
         fontSize: 25,
@@ -84,10 +86,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     botao: {
-        justifyContent: 'center',
         backgroundColor: 'green',
-        paddingVertical: 10,
-        paddingHorizontal: 30,
+        alignItems: 'center',
+        padding: 20,
         marginTop: 20,
         borderRadius: 10
     },

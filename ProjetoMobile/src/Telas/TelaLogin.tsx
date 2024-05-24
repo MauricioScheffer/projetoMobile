@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert } from 'react-native';
-
+import LinearGradient from "react-native-linear-gradient";
 import auth from "@react-native-firebase/auth";
-import { LoginProps } from './Screen';
+import { LoginProps } from '../navigation/Screen';
 
 const TelaLogin = ({ navigation, route }: LoginProps) => {
     const [email, setEmail] = useState(''); 
@@ -13,7 +13,7 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
 
             auth()
                 .signInWithEmailAndPassword(email, senha)
-                .then(() => { Alert.alert('Logado com sucesso') })
+                .then(() => { Alert.alert('Logado com sucesso'), navigation.navigate('TelaPrincipal') })
                 .catch((error) => tratarErros( String(error) ))
         }
     }
@@ -58,7 +58,7 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     Login
                 </Text>
                 <TextInput
-                    style={styles.caixa_texto}
+                    style={styles.caixa_texto} 
                     onChangeText={(text) => {setEmail(text)}} placeholder='Email'/>
 
                 <Text
@@ -66,12 +66,15 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     Senha
                 </Text>
                 <TextInput
-                    style={styles.caixa_texto} 
+                    style={styles.caixa_texto} secureTextEntry = {true}
                     onChangeText={(text) => {setSenha(text)}} placeholder='Senha'/>
 
+                    
+                { //GRADIENTE
+                /* <LinearGradient colors={["#004d40", "#009688"]}style={styles.botao}></LinearGradient> */}
                 <Pressable
                     style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={logar}>
+                    onPress={() => logar()}>
                     <Text style={styles.desc_botao}>Entrar</Text>
                 </Pressable>
 
@@ -80,6 +83,11 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     onPress={() => {navigation.navigate('Cadastro')}}>
                     <Text style={styles.desc_botao}>Cadastrar-se</Text>
                 </Pressable>
+                {/* <Pressable
+                    style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('Aprovado')}}>
+                    <Text style={styles.desc_botao}>Media</Text>
+                </Pressable> */}
             </View>
         </View>
     );
@@ -105,16 +113,17 @@ const styles = StyleSheet.create({
     caixa_texto: {
         width: '70%',
         color: 'black',
-        borderWidth: 1,
+        borderWidth: 3,
         borderRadius: 4,
         margin: 3,
         backgroundColor: 'white'
     },
     botao: {
+        elevation: 8,
         justifyContent: 'center',
-        backgroundColor: 'green',
+        backgroundColor: '#61DBFB',
         paddingVertical: 10,
-        paddingHorizontal: 30,
+        paddingHorizontal: 50,
         marginTop: 20,
         borderRadius: 10
     },
