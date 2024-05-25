@@ -70,16 +70,14 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     onChangeText={(text) => {setSenha(text)}} placeholder='Senha'/>
 
                     
-                { //GRADIENTE
-                /* <LinearGradient colors={["#004d40", "#009688"]}style={styles.botao}></LinearGradient> */}
                 <Pressable
-                    style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    style={(state) => [styles.botao1, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={() => logar()}>
                     <Text style={styles.desc_botao}>Entrar</Text>
                 </Pressable>
 
                 <Pressable
-                    style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    style={(state) => [styles.botao2, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={() => {navigation.navigate('Cadastro')}}>
                     <Text style={styles.desc_botao}>Cadastrar-se</Text>
                 </Pressable>
@@ -105,27 +103,34 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     titulo_caixa_texto:{
-        fontFamily: 'Cochin',
+        left: -100,
+        fontFamily: 'Jacquard',
         fontWeight: 'thin',
         fontSize: 25,
-        color: 'black'
+        color: 'black',
     },
     caixa_texto: {
         width: '70%',
         color: 'black',
-        borderWidth: 3,
-        borderRadius: 4,
+        // borderWidth: 3,
         margin: 3,
         backgroundColor: 'white'
     },
-    botao: {
+    botao1: {
+        elevation: 8,
+        justifyContent: 'center',
+        backgroundColor: '#61DBFB',
+        paddingVertical: 10,
+        paddingHorizontal: 80,
+        marginTop: 20,
+    },
+    botao2: {
         elevation: 8,
         justifyContent: 'center',
         backgroundColor: '#61DBFB',
         paddingVertical: 10,
         paddingHorizontal: 50,
         marginTop: 20,
-        borderRadius: 10
     },
     desc_botao: {
         fontSize: 20,

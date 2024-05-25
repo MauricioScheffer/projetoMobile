@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert } from 'reac
 
 import auth from "@react-native-firebase/auth";
 import { PrincipalProps } from '../navigation/Screen';
+import ListaFlat from '../ListaFlat';
 
 const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
     return (
@@ -14,6 +15,20 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
                     onPress={() => {navigation.navigate('Aprovado')}}>
                     <Text style={styles.desc_botao}>Calcular Média</Text>
             </Pressable>
+
+            <Pressable
+            style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('TelaCadNotas')}}>
+                    <Text style={styles.desc_botao}>Cadastrar Nota</Text>
+            </Pressable>
+
+            <Pressable
+            style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('TelaConNotas')}}>
+                    <Text style={styles.desc_botao}>Consultar Nota</Text>
+            </Pressable>
+
+            <ListaFlat/>
         </View>
     )
     
@@ -27,18 +42,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFACD'
     },
    titulo: {
+        paddingTop: 30,
         textAlign: 'center',
-        color: '#000'
+        fontSize: 20,
+        color: '#000',
    },
    botao: {
-    backgroundColor: 'green',
+    backgroundColor: '#61DBFB',
     alignItems: 'center',
     padding: 20,
-    marginTop: 20,
-    borderRadius: 10
+    marginTop: 20
 },
 desc_botao: {
     fontSize: 20,
-    color: 'white'
+    color: '#fff',
 }
 });
