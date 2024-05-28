@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert } from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
 import auth from "@react-native-firebase/auth";
-import { LoginProps } from '../navigation/Screen';
+import { LoginProps } from '../navigation/HomeNavigator';
 
 const TelaLogin = ({ navigation, route }: LoginProps) => {
     const [email, setEmail] = useState(''); 
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     caixa_texto: {
+        elevation: 8,
         width: '70%',
         color: 'black',
         // borderWidth: 3,

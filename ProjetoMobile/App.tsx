@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {} from 'react-native';
-import  HomeNavigator  from './src/navigation/Screen.tsx';
+import  HomeNavigator  from './src/navigation/HomeNavigator.tsx';
 // import Cad from './Cad';
 
 export default function App() {
