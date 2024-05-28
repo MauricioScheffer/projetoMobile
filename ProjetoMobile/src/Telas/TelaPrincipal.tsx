@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert } from 'react-native';
 
 import auth from "@react-native-firebase/auth";
-import { PrincipalProps } from '../navigation/Screen';
+import { PrincipalProps } from '../navigation/HomeNavigator';
 import ListaFlat from '../ListaFlat';
 
 const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
@@ -48,8 +48,12 @@ const styles = StyleSheet.create({
         color: '#000',
    },
    botao: {
+    elevation: 10,
     backgroundColor: '#61DBFB',
     alignItems: 'center',
+    width: 300,
+    marginLeft: 45,
+    borderRadius: 3,
     padding: 20,
     marginTop: 20
 },

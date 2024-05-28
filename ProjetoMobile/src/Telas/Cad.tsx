@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert, ImageBackground } from 'react-native';
 
 import auth from "@react-native-firebase/auth";
-import { CadUsuarioProps } from '../navigation/Screen';
+import { CadUsuarioProps } from '../navigation/HomeNavigator';
 import Carregamento from '../Carregamento'
 
 //BACKGROUND
@@ -104,13 +104,13 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
                 {/* <Text style={styles.titulo_caixa_texto}>Nome</Text>
                 <TextInput style={styles.caixa_texto} onChangeText={(text) => {setNome(text)}}/> */}
 
-                <Text style={styles.titulo_caixa_texto}>Email</Text>
+                <Text style={styles.titulo_caixa_1}>Email</Text>
                 <TextInput style={styles.caixa_texto} onChangeText={(text) => {setEmail(text)}} placeholder='Email'/>
 
-                <Text style={styles.titulo_caixa_texto}>Senha</Text>
+                <Text style={styles.titulo_caixa_2}>Senha</Text>
                 <TextInput style={styles.caixa_texto} secureTextEntry={true} onChangeText={(text) => {setSenha(text)}} placeholder='Senha'/>
 
-                <Text style={styles.titulo_caixa_texto}>Confirmar senha</Text>
+                <Text style={styles.titulo_caixa_3}>Confirmar senha</Text>
                 <TextInput style={styles.caixa_texto} secureTextEntry={true} onChangeText={(text) => {setConfirmaSenha(text)}} placeholder='Confirmar Senha'/>
 
                 {/* <Text style={styles.titulo_caixa_texto}>Data de Nascimento</Text>
@@ -136,7 +136,8 @@ export default Cadastro;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: '#FFFACB'
         // backgroundColor: '#100D28',
     },
     painel_imagem: {
@@ -157,10 +158,23 @@ const styles = StyleSheet.create({
         padding: 15,
         alignItems: 'center'
     },
-    titulo_caixa_texto:{
+    titulo_caixa_1:{
         fontFamily: 'Cochin',
-        fontWeight: 'thin',
-        marginRight: 60,
+        fontWeight: 'bold',
+        marginRight: 190,
+        fontSize: 25,
+        color: '#000'
+    },titulo_caixa_2:{
+        fontFamily: 'Cochin',
+        fontWeight: 'bold',
+        marginRight: 190,
+        fontSize: 25,
+        color: '#000'
+    },
+    titulo_caixa_3:{
+        fontFamily: 'Cochin',
+        fontWeight: 'bold',
+        marginRight: 70,
         fontSize: 25,
         color: '#000'
     },
@@ -168,17 +182,20 @@ const styles = StyleSheet.create({
         width: '70%',
         color: 'black',
         borderWidth: 1,
-        borderRadius: 0,
+        borderRadius: 4,
         margin: 3,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        marginBottom:30
     },
     botao: {
         justifyContent: 'center',
-        backgroundColor: 'green',
+        backgroundColor: '#61DBFB',
         paddingVertical: 10,
-        paddingHorizontal: 30,
+        paddingHorizontal: 50,
         marginTop: 20,
-        borderRadius: 10
+        elevation: 8,
+        fontWeight: 'bold',
+        borderRadius: 3
     },
     desc_botao: {
         fontSize: 20,

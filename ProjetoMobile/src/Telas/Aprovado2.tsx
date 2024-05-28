@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { AprovadoProps } from '../navigation/Screen.tsx';
+import { AprovadoProps } from '../navigation/HomeNavigator.tsx';
 
 const Aprovado = ({navigation,route}: AprovadoProps) => {
     const [nome, setNome] = useState('');
@@ -75,25 +75,30 @@ const styles = StyleSheet.create({
     },
     titulo_caixa_texto: {
         fontSize: 25,
-        color: 'black'
+        color: 'black',
+        fontWeight: 'bold',
     },
     caixa_texto: {
         width: '70%',
         color: 'black',
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 4,
         margin: 3,
         backgroundColor: 'white'
     },
     botao: {
-        backgroundColor: 'green',
+        backgroundColor: '#61DBFB',
         alignItems: 'center',
         padding: 20,
         marginTop: 20,
-        borderRadius: 10
+        elevation: 8,
+        width: 300,
+        borderRadius: 4,
+        marginLeft: 45,
     },
     desc_botao: {
         fontSize: 20,
+        fontWeight: 'bold',
         color: 'white'
     },
     painel_imagem: {

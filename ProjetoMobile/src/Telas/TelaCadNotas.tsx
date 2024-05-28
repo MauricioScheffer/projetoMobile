@@ -1,7 +1,7 @@
 import {TextInput, View, Alert, Text, StyleSheet, Pressable} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import Carregamento from '../Carregamento';
-import { CadNotasProps } from "../navigation/Screen";
+import { CadNotasProps } from "../navigation/HomeNavigator";
 import { useState } from 'react';
 import {INotas} from '../model/INotas'
 import { create } from 'react-test-renderer';
@@ -95,9 +95,10 @@ const styles=StyleSheet.create({
         elevation: 8,
         justifyContent: 'center',
         backgroundColor: '#61DBFB',
-        paddingVertical: 10,
-        paddingHorizontal: 30,
+        padding: 20,
         marginTop: 20,
+        width: 300,
+        marginLeft: 45,
     },
     desc_botao: {
         fontSize: 20,
