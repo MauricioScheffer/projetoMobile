@@ -18,8 +18,8 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('TelaCadNotas')}}>
-                    <Text style={styles.desc_botao}>Cadastrar Nota</Text>
+                    onPress={() => {navigation.navigate('TelaCadAtendimento')}}>
+                    <Text style={styles.desc_botao}>Atendimento</Text>
             </Pressable>
 
             <Pressable
@@ -28,7 +28,15 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
                     <Text style={styles.desc_botao}>Consultar Nota</Text>
             </Pressable>
 
-            <ListaFlat/>
+            <Pressable
+                    style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('Cadastro')}}>
+                    <Text style={styles.desc_botao}>Cadastrar-se</Text>
+             </Pressable>
+
+             
+
+           <ListaFlat/>
         </View>
     )
     
@@ -42,7 +50,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFACD'
     },
    titulo: {
-        paddingTop: 30,
+        paddingTop: 50,
         textAlign: 'center',
         fontSize: 20,
         color: '#000',

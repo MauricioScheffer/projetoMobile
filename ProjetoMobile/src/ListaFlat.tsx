@@ -1,25 +1,25 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-type Livros = {
+type Cliente = {
     nome: string,
     tipo: String,
 }
 
-let listaLivros = [] as Livros[];
+let listaCliente = [] as Cliente[];
 
-let livro1 = {nome:'O Alquimista', tipo:'Aventura'} as Livros;
-let livro2 = {nome:'Coach Chines', tipo:'Auto-Ajuda'} as Livros;
-let livro3 = {nome:'Uma Breve História Sobre O Muno', tipo:'História'} as Livros;
-let livro4 = {nome:'Dragão de Gelo', tipo:'Aventura'} as Livros;
+let livro1 = {nome:'O Alquimista', tipo:'Aventura'} as Cliente;
+let livro2 = {nome:'Coach Chines', tipo:'Auto-Ajuda'} as Cliente;
+let livro3 = {nome:'Uma Breve História Sobre O Muno', tipo:'História'} as Cliente;
+let livro4 = {nome:'Dragão de Gelo', tipo:'Aventura'} as Cliente;
 
-listaLivros.push(livro1);
-listaLivros.push(livro2);
-listaLivros.push(livro3);
-listaLivros.push(livro4);
+listaCliente.push(livro1);
+listaCliente.push(livro2);
+listaCliente.push(livro3);
+listaCliente.push(livro4);
 
 type ItemPros ={
-    livros: Livros;
+    Cliente: Cliente;
 }
 
 const ItemLista = (props: ItemPros) =>{
@@ -27,7 +27,7 @@ const ItemLista = (props: ItemPros) =>{
 return(
     <View>
         <Text style={styles.item2}>
-            {props.livros.tipo + ' ' + props.livros.nome}
+            {props.Cliente.tipo + ' ' + props.Cliente.nome}
         </Text>
     </View>
 );
@@ -37,7 +37,7 @@ const ListaFlat = () => {
     return (
         <>
             <FlatList
-            data={listaLivros}
+            data={listaCliente}
             renderItem={({ item }) => 
             <Text style={styles.item}>
                 {item.nome + '' + item.tipo}
@@ -45,8 +45,8 @@ const ListaFlat = () => {
 
 
             <FlatList
-            data={listaLivros}
-            renderItem={({ item }) => <ItemLista livros={item} /> } />
+            data={listaCliente}
+            renderItem={({ item }) => <ItemLista Cliente={item} /> } />
         
         </>
     )

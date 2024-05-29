@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert, ImageBackground } from 'react-native';
 
 import auth from "@react-native-firebase/auth";
-import { CadUsuarioProps } from '../navigation/HomeNavigator';
+import { CadClientesProps } from '../navigation/HomeNavigator';
 import Carregamento from '../Carregamento'
 
 //BACKGROUND
 const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
 
-const Cadastro = ({navigation, route}: CadUsuarioProps) => {
+const TelaCadClientes = ({navigation, route}: CadClientesProps) => {
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
     const [rua, setRua] = useState('');
@@ -170,7 +170,7 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
     );
 }
 
-export default Cadastro;
+export default TelaCadClientes;
 
 const styles = StyleSheet.create({
     container: {
@@ -210,13 +210,11 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     container_dados:{
-        flexDirection: 'row',
-        gap: 10
     }, 
     container_endereco:{
     },
     caixa_texto: {
-        width: '50%',
+        width: '70%',
         color: 'black',
         borderWidth: 1,
         borderRadius: 4,
@@ -224,7 +222,7 @@ const styles = StyleSheet.create({
         marginBottom:20,
     },
     caixa_texto_numero: {
-        width: '50%',
+        width: '20%',
         color: 'black',
         borderWidth: 1,
         borderRadius: 4,
@@ -233,7 +231,7 @@ const styles = StyleSheet.create({
         marginBottom:20,
     },
     caixa_texto_estado: {
-        width: '50%',
+        width: '20%',
         color: 'black',
         borderWidth: 1,
         borderRadius: 4,

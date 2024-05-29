@@ -44,6 +44,18 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
         }
     }
 
+    function redefinirSenha(){
+        if (email == ''){
+            Alert.alert("Email em branco", "Preencha o email")
+            return
+        }
+
+        auth()
+            .sendPasswordResetEmail(email)
+            .then(() => Alert.alert("Redefinir senha", "Enviamos um email para você redefinir sua senha"))
+            .catch((error) => console.log(error))
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.painel_imagem}>
@@ -78,8 +90,8 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
 
                 <Pressable
                     style={(state) => [styles.botao2, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('Cadastro')}}>
-                    <Text style={styles.desc_botao}>Cadastrar-se</Text>
+                    onPress={(redefinirSenha)}>
+                    <Text style={styles.desc_botao}>Esqueceu sua senha?</Text>
                 </Pressable>
                 {/* <Pressable
                     style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
@@ -105,9 +117,9 @@ const styles = StyleSheet.create({
     titulo_caixa_texto:{
         left: -100,
         fontFamily: 'Jacquard',
-        fontWeight: 'thin',
-        fontSize: 25,
-        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: '#61DBFB',
     },
     caixa_texto: {
         elevation: 8,

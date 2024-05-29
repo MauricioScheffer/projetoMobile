@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { View, Pressable, FlatList, StyleSheet, Text } from 'react-native';
+import { View, Pressable, FlatList, StyleSheet, Text, Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { TelaConProps } from '../navigation/HomeNavigator';
 import Carregamento from '../Carregamento';
@@ -73,7 +73,17 @@ const TelaConNotas = ({ navigation, route }: TelaConProps) => {
     }, []);
 
     function deletarNota(id: string) {
-        //
+        setIsCarregando(true);
+
+        firestore()
+        .collection('notas')
+        .doc(id)
+        .delete()
+        .then(() => {
+            Alert.alert("Nota", "Removido com sucesso!")
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setIsCarregando(false));
     }
     
     function alterarNota(id: string) {

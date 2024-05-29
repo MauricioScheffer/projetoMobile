@@ -1,13 +1,13 @@
 import {TextInput, View, Alert, Text, StyleSheet, Pressable} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import Carregamento from '../Carregamento';
-import { CadNotasProps } from "../navigation/HomeNavigator";
+import { TelaCadAtendimentoProps } from "../navigation/HomeNavigator";
 import { useState } from 'react';
 import {INotas} from '../model/INotas'
 import { create } from 'react-test-renderer';
 
 
-const TelaCadNotas = ({ navigation, route}: CadNotasProps) =>{
+const TelaCadAtendimento = ({ navigation, route}: TelaCadAtendimentoProps) =>{
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [isCarregando, setIsCarregando] = useState(false);
@@ -107,4 +107,4 @@ const styles=StyleSheet.create({
     }
 })
 
-export default TelaCadNotas;
+export default TelaCadAtendimento;
