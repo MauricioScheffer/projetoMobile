@@ -18,7 +18,7 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('TelaCadAtendimento')}}>
+                    onPress={() => {navigation.navigate('TelaCadNotas')}}>
                     <Text style={styles.desc_botao}>Atendimento</Text>
             </Pressable>
 
@@ -36,7 +36,7 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
 
              
 
-           <ListaFlat/>
+           {/* <ListaFlat/> */}
         </View>
     )
     
