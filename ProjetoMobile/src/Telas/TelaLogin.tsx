@@ -64,11 +64,12 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png' }} />
             </View>
             
-            <View style={styles.container_login}>
-                <Text
+             <View style={styles.container_login}>
+               <Text
                     style={styles.titulo_caixa_texto}>
                     Login
                 </Text>
+                {/* 
                 <TextInput
                     style={styles.caixa_texto} 
                     onChangeText={(text) => {setEmail(text)}} placeholder='Email'/>
@@ -92,12 +93,20 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     style={(state) => [styles.botao2, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={(redefinirSenha)}>
                     <Text style={styles.desc_botao}>Esqueceu sua senha?</Text>
-                </Pressable>
-                {/* <Pressable
-                    style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('Aprovado')}}>
-                    <Text style={styles.desc_botao}>Media</Text>
                 </Pressable> */}
+
+                <Pressable
+                    style={(state) => [styles.botao2, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('Exec1')}}>
+                    <Text style={styles.desc_botao}>Exercicio 1</Text>
+                </Pressable>
+
+                <Pressable
+                    style={(state) => [styles.botao2, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('Exec2')}}>
+                    <Text style={styles.desc_botao}>Exercicio 2</Text>
+                </Pressable>
+
             </View>
         </View>
     );
