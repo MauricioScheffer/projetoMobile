@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert, ImageBackgr
 import auth from "@react-native-firebase/auth";
 import { CadUsuarioProps } from '../navigation/HomeNavigator';
 import Carregamento from '../Carregamento'
+import firestore from '@react-native-firebase/firestore';
 
 //BACKGROUND
 const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
@@ -22,82 +23,64 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
     const [isCarregando, setIsCarregando] = useState(false);
     const [dataNasc, setDataNasc] = useState(''); 
 
-    function login() {
-
-        if (verificaCampos()) {
-
-            auth()
-                .signInWithEmailAndPassword(email, senha)
-                .then(() => { Alert.alert('Logado com sucesso') })
-                .catch((error) => tratarErros( String(error) ))
-        }
-    }
-
     async function cadastrar() {
         setIsCarregando(true);
 
         if(verificaCampos()){
-            auth()
-            .createUserWithEmailAndPassword(email, senha)
+            firestore()
+            .collection('Clientes')
+            .add({
+               nome, cpf, rua, numero, bairro, cidade, estado, email, senha, dataNasc
+             })
             .then(() => {
-                Alert.alert("Conta", "Cadastro com sucesso")
-                navigation.goBack();
+                Alert.alert("Cliente", "Cadastro com sucesso");
+                setNome(''); setRua(''); setNumero(''); setBairro(''); setCidade(''); setEstado(''); 
+                setCpf(''); setEmail(''); setSenha('');
+                navigation.navigate('TelaPrincipal')
             })
-            .catch((error) => { tratarErros( String(error) )})
-            .finally(() => {
-            setIsCarregando(false)
-            }); 
+           .catch((error) => tratarErros( String(error) ))
         }
-        setIsCarregando;
+        setIsCarregando(false);
     }
 
     function verificaCampos(){
-        let resultado = true;
         if(nome == ''){
             Alert.alert("Nome em branco", "Digite um nome")
             return false;
-        }
-        if(rua == ''){
+        }if (dataNasc == ''){
+            Alert.alert("Data de Nascimento em branco", "Digite uma data")
+            return false;
+        }if(cpf == ''){
+            Alert.alert("CPF em branco", "Digite um CPF")
+            return false;
+        }if(rua == ''){
             Alert.alert("Rua em branco", "Digite sua rua")
             return false;
-        }
-        if(numero == ''){
+        }if(numero == ''){
             Alert.alert("Número da Casa em branco", "Digite o número da sua casa")
             return false;
-        }
-        if(bairro == ''){
+        }if(bairro == ''){
             Alert.alert("Bairro em branco", "Digite seu bairro")
             return false;
-        }
-        if(cidade == ''){
+        }if(cidade == ''){
             Alert.alert("Cidade em branco", "Digite sua cidade")
             return false;
-        }
-        if(estado == ''){
+        }if(estado == ''){
             Alert.alert("Estado em branco", "Digite seu estado")
             return false;
-        }
-        if (email == ''){
+        }if (email == ''){
             Alert.alert("Email em branco", "Digite um email")
             return false;
-        }
-        if (senha == ''){
+        }if (senha == ''){
             Alert.alert("Senha em branco", "Digite uma senha")
             return false;
-        }
-        if (confirmaSenha == ''){
+        }if (confirmaSenha == ''){
+            Alert.alert("Confirmação de senha em branco", "Digite a confirmção de senha")
+            return false;
+        }if (senha != confirmaSenha){
             Alert.alert("Confirmação de senha em branco", "Digite a confirmção de senha")
             return false;
         }
-        if (senha != confirmaSenha){
-            Alert.alert("Confirmação de senha em branco", "Digite a confirmção de senha")
-            return false;
-        }
-        // if (dataNasc == ''){
-        //     Alert.alert("Data de Nascimento em branco", "Digite uma data")
-        //     return false;
-        // }
-
         return true;
     }
     //TIRAR ISSO 
@@ -119,7 +102,7 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
 
     return (
         <View style={styles.container}>
-            <Carregamento isCarregando={isCarregando}/>
+            {/* <Carregamento isCarregando={isCarregando}/> */}
 
              {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}></ImageBackground> */}
 
@@ -131,36 +114,48 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
             </View>
             <View style={styles.container_login}>
 
-                <View style={styles.container_dados}>
+                <View style={styles.container_1}>
                 <TextInput style={styles.caixa_texto} onChangeText={(text) => {setNome(text)}} placeholder='Nome'/>
 
                 <TextInput style={styles.caixa_texto} onChangeText={(text) => {setDataNasc(text)}} placeholder='Data de Nascimento'/>
                 </View>
 
-                <View style={styles.container_endereco}>
-                <TextInput style={styles.caixa_texto} onChangeText={(text) => {setRua(text)}} placeholder='Rua'/>
+                <View style={styles.container_2}>
+                <TextInput style={styles.caixa_texto} onChangeText={(text) => {setCpf(text)}} placeholder='CPF'/>
 
+                <TextInput style={styles.caixa_texto} onChangeText={(text) => {setRua(text)}} placeholder='Rua'/>
+                </View>
+
+                <View style={styles.container_3}>
                 <TextInput style={styles.caixa_texto_numero} onChangeText={(text) => {setNumero(text)}} placeholder='Número'/>
 
                 <TextInput style={styles.caixa_texto} onChangeText={(text) => {setBairro(text)}} placeholder='Bairro'/>
+                </View>
 
+                <View style={styles.container_4}>
                 <TextInput style={styles.caixa_texto} onChangeText={(text) => {setCidade(text)}} placeholder='Cidade'/>
 
                 <TextInput style={styles.caixa_texto_estado} onChangeText={(text) => {setEstado(text)}} placeholder='Estado'/>
                 </View>
 
+                <View style={styles.meio}>
+                <Text style={styles.title}>Conta</Text>
+                </View>
+
+                <View style={styles.container_5}>
                 <TextInput style={styles.caixa_texto} onChangeText={(text) => {setEmail(text)}} placeholder='Email'/>
 
                 <TextInput style={styles.caixa_texto} secureTextEntry={true} onChangeText={(text) => {setSenha(text)}} placeholder='Senha'/>
+                </View>
 
+                <View style={styles.container_6}>
                 <TextInput style={styles.caixa_texto} secureTextEntry={true} onChangeText={(text) => {setConfirmaSenha(text)}} placeholder='Confirmar Senha'/>
-
+                </View>
 
                 <Pressable
                     style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => cadastrar()}
-                    disabled={isCarregando} >
-                    <Text style={styles.desc_botao}>Entrar</Text>
+                    onPress={() => cadastrar()} >
+                    <Text style={styles.desc_botao}>Cadastrar</Text>
                 </Pressable>
                 
             </View>
@@ -183,6 +178,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 70,
         backgroundColor: '#61DBFB'
+    }, 
+    meio:{
+        backgroundColor: '#61DBFB',
+        alignSelf: 'center',
+        flexDirection: 'row',
+        height: 70,
+        width: 200,
+        textAlign: 'center',
+        marginBottom: 20
     },
     title:{
         color: '#fff',
@@ -209,11 +213,27 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         padding: 15,
     },
-    container_dados:{
+    container_1:{
         flexDirection: 'row',
         gap: 10
     }, 
-    container_endereco:{
+    container_2:{
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_3:{
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_4:{
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_5:{
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_6:{
     },
     caixa_texto: {
         width: '50%',
@@ -246,6 +266,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#61DBFB',
         paddingVertical: 10,
         paddingHorizontal: 50,
+        marginHorizontal: 60,
         marginTop: 20,
         elevation: 8,
         fontWeight: 'bold',
@@ -253,6 +274,7 @@ const styles = StyleSheet.create({
     },
     desc_botao: {
         fontSize: 20,
-        color: 'white'
+        color: 'white',
+        alignSelf:'center'
     }
 });

@@ -7,7 +7,8 @@ import Aprovado from '../Telas/Aprovado2';
 import TelaCadNotas from '../Telas/TelaCadNotas'
 import TelaConNotas from '../Telas/TelaConNotas'
 import TelaAltNota from '../Telas/TelaAltNotas'
-import TelaCadClientes from '../Telas/TelaCadAtendi';
+import TelaCadAtendi from '../Telas/TelaCadAtendi';
+import TelaAltClientes from '../Telas/TelaAltClientes';
 import Exec1 from '../Atividade/Exec1';
 import Exec2 from '../Atividade/Exec2';
 import Exec3 from '../Atividade/Exec3';
@@ -19,27 +20,31 @@ type RootStackParamList = {
   Aprovado: undefined;
   TelaCadNotas: undefined;
   TelaConNotas: undefined;
-  TelaAltNota: {id:string}
-  Exec1: undefined;
-  Exec2: undefined;
-  Exec3: undefined;
+  TelaAltNota: {id:string};
+  TelaCadAtendi: undefined;
+  TelaAltClientes: {id:string};
+  // Exec1: undefined;
+  // Exec2: undefined;
+  // Exec3: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const HomeNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName= "Exec3" screenOptions={{headerShown:false}}>
+    <Stack.Navigator initialRouteName= "TelaLogin" screenOptions={{headerShown:false}}>
         <Stack.Screen name="TelaLogin" component={TelaLogin}/>
         <Stack.Screen name="Cadastro" component={Cadastro}/>
         <Stack.Screen name="TelaPrincipal" component={TelaPrincipal}/>
         <Stack.Screen name="Aprovado" component={Aprovado}/>
         <Stack.Screen name="TelaCadNotas" component={TelaCadNotas}/>
         <Stack.Screen name="TelaConNotas" component={TelaConNotas}/>
-        <Stack.Screen name="TelaAltNota" component={TelaAltNota}/>
-        <Stack.Screen name="Exec1" component={Exec1}/>
+        <Stack.Screen name="TelaAltNota" component={TelaAltNota}/> 
+        <Stack.Screen name="TelaCadAtendi" component={TelaCadAtendi}/>
+        <Stack.Screen name="TelaAltClientes" component={TelaAltClientes}/> 
+        {/* <Stack.Screen name="Exec1" component={Exec1}/>
         <Stack.Screen name="Exec2" component={Exec2}/>
-        <Stack.Screen name="Exec3" component={Exec3}/>
+        <Stack.Screen name="Exec3" component={Exec3}/> */}
       </Stack.Navigator>
   );
 }
@@ -58,10 +63,10 @@ type TelaConProps = NativeStackScreenProps<RootStackParamList, 'TelaConNotas'>;
 
 type AltNotaProps = NativeStackScreenProps<RootStackParamList, 'TelaAltNota'>;
 
-type Exec1Props = NativeStackScreenProps<RootStackParamList, 'Exec1'>;
-type Exec2Props = NativeStackScreenProps<RootStackParamList, 'Exec2'>;
-type Exec3Props = NativeStackScreenProps<RootStackParamList, 'Exec3'>;
+type AtendimentoProps = NativeStackScreenProps<RootStackParamList, 'TelaCadAtendi'>;
+
+type AltClienteProps = NativeStackScreenProps<RootStackParamList, 'TelaAltClientes'>;
 
 
 export default HomeNavigator;
-export type {LoginProps, CadUsuarioProps, PrincipalProps, AprovadoProps, TelaCadNotasProps, TelaConProps, AltNotaProps, Exec1Props, Exec2Props, Exec3Props};
+export type {LoginProps, CadUsuarioProps, PrincipalProps, AprovadoProps, TelaCadNotasProps, TelaConProps, AltNotaProps, AtendimentoProps, AltClienteProps};
