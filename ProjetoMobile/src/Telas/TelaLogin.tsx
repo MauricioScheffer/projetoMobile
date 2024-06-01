@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert, ImageBackground } from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
 import auth from "@react-native-firebase/auth";
 import { LoginProps } from '../navigation/HomeNavigator';
@@ -57,11 +57,11 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
     }
 
     return (
+        
         <View style={styles.container}>
             <View style={styles.painel_imagem}>
-                <Image 
-                    style={styles.imagem} 
-                    source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png' }} />
+                <Image style={styles.imagem} 
+                    source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png' }}/>
             </View>
             
              <View style={styles.container_login}>
@@ -69,7 +69,7 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     style={styles.titulo_caixa_texto}>
                     Login
                 </Text>
-                {/* 
+                
                 <TextInput
                     style={styles.caixa_texto} 
                     onChangeText={(text) => {setEmail(text)}} placeholder='Email'/>
@@ -93,18 +93,6 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     style={(state) => [styles.botao2, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={(redefinirSenha)}>
                     <Text style={styles.desc_botao}>Esqueceu sua senha?</Text>
-                </Pressable> */}
-
-                <Pressable
-                    style={(state) => [styles.botao2, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('Exec1')}}>
-                    <Text style={styles.desc_botao}>Exercicio 1</Text>
-                </Pressable>
-
-                <Pressable
-                    style={(state) => [styles.botao2, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('Exec2')}}>
-                    <Text style={styles.desc_botao}>Exercicio 2</Text>
                 </Pressable>
 
             </View>

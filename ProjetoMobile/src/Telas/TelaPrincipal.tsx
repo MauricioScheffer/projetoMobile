@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert } from 'react-native';
 
-import auth from "@react-native-firebase/auth";
 import { PrincipalProps } from '../navigation/HomeNavigator';
 import ListaFlat from '../ListaFlat';
 
@@ -13,19 +12,25 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={() => {navigation.navigate('Aprovado')}}>
-                    <Text style={styles.desc_botao}>Calcular Média</Text>
+                    <Text style={styles.desc_botao}>Lista de Clientes</Text>
             </Pressable>
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={() => {navigation.navigate('TelaCadNotas')}}>
-                    <Text style={styles.desc_botao}>Atendimento</Text>
+                    <Text style={styles.desc_botao}>Notas</Text>
             </Pressable>
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('TelaConNotas')}}>
-                    <Text style={styles.desc_botao}>Consultar Nota</Text>
+                    onPress={() => {navigation.navigate('TelaAltClientes')}}>
+                    <Text style={styles.desc_botao}>Alterar</Text>
+            </Pressable>
+
+            <Pressable
+            style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('TelaCadAtendi')}}>
+                    <Text style={styles.desc_botao}>Atendimento</Text>
             </Pressable>
 
             <Pressable
