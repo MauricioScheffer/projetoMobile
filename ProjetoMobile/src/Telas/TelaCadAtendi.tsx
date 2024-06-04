@@ -4,45 +4,42 @@ import Carregamento from '../Carregamento';
 import { AtendimentoProps } from "../navigation/HomeNavigator";
 import { useState } from 'react';
 import { create } from 'react-test-renderer';
-import { IClientes } from '../model/IClientes';
+import { IAtendimento } from '../model/IAtendimento';
+import { Dropdown } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-
+const data = [
+    { label: 'Item 1', value: '1' },
+    { label: 'Item 2', value: '2' },
+    { label: 'Item 3', value: '3' },
+    { label: 'Item 4', value: '4' },
+    { label: 'Item 5', value: '5' },
+    { label: 'Item 6', value: '6' },
+    { label: 'Item 7', value: '7' },
+    { label: 'Item 8', value: '8' },
+  ];
+  
 const TelaCadAtendi = ({ navigation, route}: AtendimentoProps) =>{
-    const [atendimento, setAtendimento] = useState('');
+    const [value, setValue] = useState(null);
     const [nome, setNome] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [rua, setRua] = useState('');
-    const [numero, setNumero] = useState('');
-    const [bairro, setBairro] = useState('');
-    const [cidade, setCidade] = useState('');
-    const [estado, setEstado] = useState('');
-    const [email, setEmail] = useState(''); 
-    const [senha, setSenha] = useState('');
-    const [confirmaSenha, setConfirmaSenha] = useState('');
-    const [dataNasc, setDataNasc] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [exame, setExame] = useState('');
+    //const [dataNasc, setDataNasc] = useState('');
     const [isCarregando, setIsCarregando] = useState(false);
 
 function cadastrar(){
     setIsCarregando(true);
 
-    if(verificaCampos()){
         let cliente = {
-            atendimento: atendimento,
             nome: nome,
-            cpf: cpf,
-            rua: rua,
-            numero: numero,
-            bairro: bairro,
-            cidade: cidade,
-            estado: estado,
-            email: email,
-            senha: senha,
-            dataNasc: Date,
+            exame: exame,
+            descricao: descricao,
+            //dataNasc: Date,
             created_at: firestore.FieldValue.serverTimestamp()
-        } as unknown as IClientes;
+        } as IAtendimento;
 
         firestore()
-        .collection('cliente')
+        .collection('Atendimento')
         .add(cliente)
         .then(() => {
             Alert.alert("Nota", "Cadastrada com sucesso")
@@ -51,66 +48,49 @@ function cadastrar(){
         .catch((error) => console.log(error))
         .finally(() => setIsCarregando(false));
     }
-    setIsCarregando(false);
-       
-}
+    setIsCarregando(false);      
 
-function verificaCampos(){
-    if(atendimento == ''){
-        Alert.alert("Atendimento em branco", "Preencha o Atendimento")
-        return false;
-    }
-    if(nome == ''){
-        Alert.alert("Nome em branco", "Digite um nome")
-        return false;
-    }if (dataNasc == ''){
-        Alert.alert("Data de Nascimento em branco", "Digite uma data")
-        return false;
-    }if(cpf == ''){
-        Alert.alert("CPF em branco", "Digite um CPF")
-        return false;
-    }if(rua == ''){
-        Alert.alert("Rua em branco", "Digite sua rua")
-        return false;
-    }if(numero == ''){
-        Alert.alert("Número da Casa em branco", "Digite o número da sua casa")
-        return false;
-    }if(bairro == ''){
-        Alert.alert("Bairro em branco", "Digite seu bairro")
-        return false;
-    }if(cidade == ''){
-        Alert.alert("Cidade em branco", "Digite sua cidade")
-        return false;
-    }if(estado == ''){
-        Alert.alert("Estado em branco", "Digite seu estado")
-        return false;
-    }if (email == ''){
-        Alert.alert("Email em branco", "Digite um email")
-        return false;
-    }if (senha == ''){
-        Alert.alert("Senha em branco", "Digite uma senha")
-        return false;
-    }if (confirmaSenha == ''){
-        Alert.alert("Confirmação de senha em branco", "Digite a confirmção de senha")
-        return false;
-    }if (senha != confirmaSenha){
-        Alert.alert("Confirmação de senha em branco", "Digite a confirmção de senha")
-        return false;
-    }
-    return true;
-}
     return(
     <View style={styles.container}>
         <Carregamento isCarregando={isCarregando}/>
-            
-            <Text style={styles.texto}> Notas</Text>
+
+        <Dropdown
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={data}
+        search
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        placeholder="Select item"
+        searchPlaceholder="Search..."
+        value={value}
+        onChange={item => {
+          setValue(item.value);
+        }}
+        renderLeftIcon={() => (
+          <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+        )}
+      />
+            <Text style={styles.texto}>Exame</Text>
+
+        <TextInput 
+        style={styles.caixa_texto}
+        secureTextEntry={true} 
+        onChangeText={(text) => {setExame(text)}} 
+        placeholder='Exame'/>
+
+            <Text style={styles.texto}>Descrição</Text>
         <TextInput
         multiline
         numberOfLines={4}
         maxLength={100}
         style={styles.caixa_texto}
-        onChangeText={(text) => { setAtendimento(text)}} 
-        placeholder='Notas'/>
+        onChangeText={(text) => { setDescricao(text)}} 
+        placeholder='Descrição'/>
 
         <Pressable
             style={styles.botao}
@@ -129,6 +109,29 @@ const styles=StyleSheet.create({
     container: {
         gap: 20
     },
+    dropdown: {
+        margin: 16,
+        height: 50,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
+      },
+      icon: {
+        marginRight: 5,
+      },
+      placeholderStyle: {
+        fontSize: 16,
+      },
+      selectedTextStyle: {
+        fontSize: 16,
+      },
+      iconStyle: {
+        width: 20,
+        height: 20,
+      },
+      inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+      },
     texto: {
         color: 'black',
         fontSize: 30,

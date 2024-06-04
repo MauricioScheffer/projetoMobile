@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert, ImageBackground } from 'react-native';
 
 import auth from "@react-native-firebase/auth";
-import { CadUsuarioProps } from '../navigation/HomeNavigator';
+import { CadClienteProps } from '../navigation/HomeNavigator';
 import Carregamento from '../Carregamento'
 import firestore from '@react-native-firebase/firestore';
 
-//BACKGROUND
-const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
-
-const Cadastro = ({navigation, route}: CadUsuarioProps) => {
+const TelaCadClientes = ({navigation, route}: CadClienteProps) => {
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
     const [rua, setRua] = useState('');
@@ -17,6 +14,7 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
     const [bairro, setBairro] = useState('');
     const [cidade, setCidade] = useState('');
     const [estado, setEstado] = useState('');
+    const [complemento, setComplemento] = useState('')
     const [email, setEmail] = useState(''); 
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
@@ -30,7 +28,7 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
             firestore()
             .collection('Clientes')
             .add({
-               nome, cpf, rua, numero, bairro, cidade, estado, email, senha, dataNasc
+               nome, cpf, rua, numero, bairro, cidade, estado, complemento,email, senha, dataNasc
              })
             .then(() => {
                 Alert.alert("Cliente", "Cadastro com sucesso");
@@ -102,13 +100,7 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
 
     return (
         <View style={styles.container}>
-            {/* <Carregamento isCarregando={isCarregando}/> */}
-
-             {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}></ImageBackground> */}
-
-            {/* <View style={styles.painel_imagem}>
-                <Image style={styles.imagem} source={require('./imagem/LogoMobile.png') } />
-            </View> */}
+            <Carregamento isCarregando={isCarregando}/>
             <View style={styles.topo}>
                 <Text style={styles.title}>Cadastro</Text>
             </View>
@@ -133,10 +125,12 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
                 </View>
 
                 <View style={styles.container_4}>
+                <TextInput style={styles.caixa_texto} onChangeText={(text) => {setComplemento(text)}} placeholder='Complemento'/>
+
                 <TextInput style={styles.caixa_texto} onChangeText={(text) => {setCidade(text)}} placeholder='Cidade'/>
+                </View>
 
                 <TextInput style={styles.caixa_texto_estado} onChangeText={(text) => {setEstado(text)}} placeholder='Estado'/>
-                </View>
 
                 <View style={styles.meio}>
                 <Text style={styles.title}>Conta</Text>
@@ -159,13 +153,12 @@ const Cadastro = ({navigation, route}: CadUsuarioProps) => {
                 </Pressable>
                 
             </View>
-            {/* <ImageBackground/> */}
         </View>
 
     );
 }
 
-export default Cadastro;
+export default TelaCadClientes;
 
 const styles = StyleSheet.create({
     container: {
