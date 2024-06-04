@@ -11,32 +11,26 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('Aprovado')}}>
+                    onPress={() => {navigation.navigate('TelaConClientes')}}>
                     <Text style={styles.desc_botao}>Lista de Clientes</Text>
             </Pressable>
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('TelaCadNotas')}}>
-                    <Text style={styles.desc_botao}>Notas</Text>
-            </Pressable>
-
-            <Pressable
-            style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('TelaAltClientes')}}>
+                    onPress={() => {navigation.navigate('TelaConAtendi')}}>
                     <Text style={styles.desc_botao}>Alterar</Text>
             </Pressable>
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={() => {navigation.navigate('TelaCadAtendi')}}>
-                    <Text style={styles.desc_botao}>Atendimento</Text>
+                    <Text style={styles.desc_botao}>Cadastro de Atendimento</Text>
             </Pressable>
 
             <Pressable
                     style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('Cadastro')}}>
-                    <Text style={styles.desc_botao}>Cadastrar-se</Text>
+                    onPress={() => {navigation.navigate('TelaCadClientes')}}>
+                    <Text style={styles.desc_botao}>Cadastra Clientes</Text>
              </Pressable>
 
              
