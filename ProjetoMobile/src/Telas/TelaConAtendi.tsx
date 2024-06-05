@@ -16,10 +16,13 @@ const ItemNota = (props: ItemNotaProps) => {
     return(
         <View style={styles.card}>
             <View style={styles.dados_card}>
-                <Text style={{fontSize: 35, fontWeight: '600'}}>
+                <Text style={{fontSize: 25, fontWeight: '600'}}>
                     {props.numero+1 + ' - ' + props.atendimento.nome}
                 </Text>
-                <Text style={{ fontSize: 20, fontWeight: '900' }}>{props.atendimento.exame}</Text>
+                <Text style={{ fontSize: 18, fontWeight: '900' }}>Exame: {props.atendimento.exame}</Text>
+                <Text style={{ fontSize: 18, fontWeight: '900' }}>Descrição: {props.atendimento.descricao}</Text>
+                <Text style={{ fontSize: 18, fontWeight: '900' }}>Data: {props.atendimento.data}</Text>
+                <Text style={{ fontSize: 18, fontWeight: '900' }}>Hora: {props.atendimento.hora}</Text>
             </View>
 
         {/* <View style={styles.botao_alterar}>
@@ -137,16 +140,17 @@ const styles =StyleSheet.create({
     },
     texto_botao_card:{
         fontSize: 20,
+        //fontSize: 30,
         fontWeight: '600',
         right: -2,
-        color: 'black'
+        color: 'red'
     },
     botao_excluir:{
-        backgroundColor: '#B22222',
-        width: 80,
+        //backgroundColor: '#B22222',
+        width: 100,
         borderRadius: 20,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     titulo:{
         marginTop: 40,
