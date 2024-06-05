@@ -54,7 +54,7 @@ const TelaConAtendi = ({ navigation, route }: TelaConAtendimentoProps) => {
         setIsCarregando(true);
 
         const subscribe = firestore()
-        .collection('notas')
+        .collection('Atendimento')
         .onSnapshot(querySnapshot => {
             const data = querySnapshot.docs.map(doc => {
 
@@ -93,7 +93,7 @@ const TelaConAtendi = ({ navigation, route }: TelaConAtendimentoProps) => {
     return (
         <View style={styles.container} >
             <Carregamento isCarregando={isCarregando}/>
-            <Text style={styles.titulo}>Listagem de Notas</Text>
+            <Text style={styles.titulo}>Listagem de Atendimentos</Text>
             <FlatList 
             data={atendimento}
             renderItem={(info) => 

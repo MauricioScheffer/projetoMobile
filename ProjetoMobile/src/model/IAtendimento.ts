@@ -5,6 +5,8 @@ type IAtendimento = {
     nome: string,
     exame: string,
     descricao: string,
+    dia: string,
+    hora: string,
     created_at: FirebaseFirestoreTypes.FieldValue
 }
 

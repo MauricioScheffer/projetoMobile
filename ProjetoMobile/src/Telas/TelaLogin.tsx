@@ -57,12 +57,8 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
     }
 
     return (
-        
-        <View style={styles.container}>
-            <View style={styles.painel_imagem}>
-                <Image style={styles.imagem} 
-                    source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png' }}/>
-            </View>
+
+      <ImageBackground source={require ("../imagens/Iphone.jpg")} style={styles.container}>
             
              <View style={styles.container_login}>
                <Text
@@ -96,7 +92,7 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                 </Pressable>
 
             </View>
-        </View>
+        </ImageBackground>
     );
 }
 
@@ -105,39 +101,41 @@ export default TelaLogin;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFACD'
     },
     container_login: {
         flex: 2,
-        alignItems: 'center'
+        marginTop: 130,
+        alignItems: 'center',
+        gap: 5
     },
     titulo_caixa_texto:{
-        left: -100,
+        left: -120,
         fontFamily: 'Jacquard',
         fontWeight: 'bold',
         fontSize: 20,
-        color: '#61DBFB',
+        color: 'white',
     },
     caixa_texto: {
         elevation: 8,
-        width: '70%',
+        width: '75%',
         color: 'black',
-        // borderWidth: 3,
+        fontWeight: '600',
+        borderWidth: 3,
         margin: 3,
         backgroundColor: 'white'
     },
     botao1: {
         elevation: 8,
         justifyContent: 'center',
-        backgroundColor: '#61DBFB',
+        backgroundColor: 'grey',
         paddingVertical: 10,
-        paddingHorizontal: 80,
-        marginTop: 20,
+        paddingHorizontal: 120,
+        marginTop: 40,
     },
     botao2: {
         elevation: 8,
         justifyContent: 'center',
-        backgroundColor: '#61DBFB',
+        backgroundColor: 'light grey',
         paddingVertical: 10,
         paddingHorizontal: 50,
         marginTop: 20,
@@ -146,14 +144,4 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: 'white'
     },
-    painel_imagem: {
-        flex:1,
-        alignItems:'center', 
-        justifyContent:'center'
-    },
-    imagem: { 
-        width: 200, 
-        height: 200, 
-        resizeMode: "center"
-    }
 });
