@@ -24,10 +24,11 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
 
     async function carregar() {
         setIsCarregando(true);
-        const resultado = await firestore()
-        .collection('Clientes')
-        .doc(id)
-        .get();
+        try{
+            const resultado = await firestore()
+            .collection('Clientes')
+            .doc(id)
+            .get();
 
         const cliente = {
             id: resultado.id,
@@ -46,25 +47,36 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
         setSenha(cliente.senha);
         setConfirmaSenha(cliente.senha); // Defina isso conforme necessário
         setIsCarregando(false);
+    }catch (error){
+        setIsCarregando(false);
+        console.log(error)
     }
+    setIsCarregando(false);
+}
 
     useEffect(() => {
         carregar();
     }, []);
 
-    function alterar(){
-        setIsCarregando(true);
-        
+    function alterar(){ 
         if(verificaCampos()){
+        setIsCarregando(true);
         firestore()
         .collection('Clientes')
         .doc(id)
         .update({
-            cliente,
+            nome,
+            dataNasc,
+            rua,
+            numero,
+            bairro,
+            complemento,
+            cidade,
+            estado,
             created_at: firestore.FieldValue.serverTimestamp()
         })
         .then(() => {
-            Alert.alert("CLiente", "Alterado com sucesso")
+            Alert.alert("Cliente", "Alterado com sucesso")
             navigation.goBack();
         })
         .catch((error) => console.log(error)) 

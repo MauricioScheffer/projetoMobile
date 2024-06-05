@@ -46,7 +46,7 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
 
     function redefinirSenha(){
         if (email == ''){
-            Alert.alert("Email em branco", "Preencha o email")
+            Alert.alert("Email vazio", "Preencha o Email para redefinir a senha")
             return
         }
 
@@ -83,6 +83,12 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     style={(state) => [styles.botao1, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={() => logar()}>
                     <Text style={styles.desc_botao}>Entrar</Text>
+                </Pressable>
+
+                <Pressable
+                    style={(state) => [styles.botao3, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('CadUsuarios')}}>
+                    <Text style={styles.desc_botao}>Cadastrar-se</Text>
                 </Pressable>
 
                 <Pressable
@@ -140,7 +146,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 50,
         marginTop: 20,
     },
+    botao3: {
+        //left: -50,
+        elevation: 8,
+        justifyContent: 'center',
+        backgroundColor: 'light',
+        paddingVertical: 10,
+        paddingHorizontal: 90,
+        marginTop: 10,
+    },
     desc_botao: {
+        fontWeight: '700',
         fontSize: 20,
         color: 'white'
     },

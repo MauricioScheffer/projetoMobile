@@ -122,6 +122,24 @@ const ajustarData = (text: string) => {
 //     setHora(text);
 //   }
 // }
+const ajustarHora = (text: string) => {
+  let horaFormatada = text.replace(/\D/g, '');
+
+  if (horaFormatada.length >= 2) {
+      horaFormatada = horaFormatada.substring(0, 2) + ':' + horaFormatada.substring(2);
+  }
+
+  const horas = parseInt(horaFormatada.substring(0, 2)) || 0;
+  const minutos = parseInt(horaFormatada.substring(3, 5)) || 0;
+
+  const horasValidas = Math.min(23, Math.max(0, horas));
+  const minutosValidos = Math.min(59, Math.max(0, minutos));
+
+  horaFormatada = `${horasValidas.toString().padStart(2, '0')}:${minutosValidos.toString().padStart(2, '0')}`;
+
+  setHora(horaFormatada);
+}
+
   return (
     <ImageBackground source={require("../imagens/PaisagemCadAtendimento.jpg")} style={styles.container}>
     <ScrollView>
@@ -165,7 +183,7 @@ const ajustarData = (text: string) => {
       <TextInput
         style={styles.caixa_data}
         keyboardType='numeric'
-        onChangeText={(text) => { setHora(text) }}
+        onChangeText={ajustarHora}
         value={hora}
         placeholder='--:--' />
       </View>
@@ -199,7 +217,6 @@ const ajustarData = (text: string) => {
   )
 
 }
-
 export default TelaCadAtendi;
 
 const styles = StyleSheet.create({

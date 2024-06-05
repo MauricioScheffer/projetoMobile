@@ -25,7 +25,7 @@ const ItemCliente = (props: ItemClienteProps) => {
         <View style={styles.botao_alterar}>
             <Pressable
             onPress={() => props.onAlterar(props.cliente.id!)}>
-                <Text style={styles.texto_botao_card}>
+                <Text style={styles.texto_botao_card_alterar}>
                 Alterar
                 </Text>
             </Pressable>
@@ -34,7 +34,7 @@ const ItemCliente = (props: ItemClienteProps) => {
         <View style={styles.botao_excluir}>
             <Pressable
             onPress={() => props.onDeletar(props.cliente.id!)}>
-                <Text style={styles.texto_botao_card}>
+                <Text style={styles.texto_botao_card_excluir}>
                 Deletar
                 </Text>
             </Pressable>
@@ -123,20 +123,26 @@ const styles =StyleSheet.create({
         flex: 1
     },
     botao_alterar:{
-        backgroundColor: '#2E8B57',
+        //backgroundColor: '#2E8B57',
         width: 80,
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    texto_botao_card:{
+    texto_botao_card_alterar:{
         fontSize: 20,
         fontWeight: '600',
         right: -2,
-        color: 'black'
+        color: 'green'
+    },
+    texto_botao_card_excluir:{
+        fontSize: 20,
+        fontWeight: '600',
+        right: -2,
+        color: 'red'
     },
     botao_excluir:{
-        backgroundColor: '#B22222',
+        //backgroundColor: '#B22222',
         width: 80,
         borderRadius: 20,
         justifyContent: 'center',

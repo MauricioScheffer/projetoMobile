@@ -7,6 +7,8 @@ import TelaCadAtendi from '../Telas/TelaCadAtendi';
 import TelaAltClientes from '../Telas/TelaAltClientes';
 import TelaConAtendi from '../Telas/TelaConAtendi';
 import TelaConClientes from '../Telas/TelaConClientes';
+import CadUsuarios from '../Telas/CadUsuarios';
+
 type RootStackParamList = {
   TelaLogin: undefined;
   TelaCadClientes: undefined;
@@ -15,6 +17,7 @@ type RootStackParamList = {
   TelaAltClientes: {id:string};
   TelaConAtendi: undefined;
   TelaConClientes: undefined;
+  CadUsuarios: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -29,6 +32,7 @@ const HomeNavigator = () => {
         <Stack.Screen name="TelaCadAtendi" component={TelaCadAtendi}/>
         <Stack.Screen name="TelaAltClientes" component={TelaAltClientes}/> 
         <Stack.Screen name="TelaConClientes" component={TelaConClientes}/> 
+        <Stack.Screen name="CadUsuarios" component={CadUsuarios}/> 
 
       </Stack.Navigator>
   );
@@ -38,6 +42,7 @@ type LoginProps = NativeStackScreenProps<RootStackParamList, 'TelaLogin'>;
 
 //PRINCIPAL
 type PrincipalProps = NativeStackScreenProps<RootStackParamList, 'TelaPrincipal'>;
+type CadUsuariosProps = NativeStackScreenProps<RootStackParamList, 'CadUsuarios'>;
 
 //CLIENTE
 type CadClienteProps = NativeStackScreenProps<RootStackParamList, 'TelaCadClientes'>;
@@ -50,4 +55,4 @@ type AtendimentoProps = NativeStackScreenProps<RootStackParamList, 'TelaCadAtend
 
 
 export default HomeNavigator;
-export type {LoginProps, CadClienteProps, TelaConClienteProps, PrincipalProps, TelaConAtendimentoProps, AtendimentoProps, AltClienteProps};
+export type {LoginProps, CadUsuariosProps, CadClienteProps, TelaConClienteProps, PrincipalProps, TelaConAtendimentoProps, AtendimentoProps, AltClienteProps};
