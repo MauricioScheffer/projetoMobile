@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { View, Pressable, FlatList, StyleSheet, Text, Alert } from 'react-native';
+import { View, Pressable, FlatList, StyleSheet, Text, Alert, ImageBackground } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { TelaConAtendimentoProps } from '../navigation/HomeNavigator';
 import Carregamento from '../Carregamento';
@@ -8,7 +8,7 @@ import { IAtendimento } from '../model/IAtendimento';
 type ItemNotaProps = {
     numero: number;
     atendimento: IAtendimento;
-    onAlterar: (id: string) => void;
+    //onAlterar: (id: string) => void;
     onDeletar: (id: string) => void;
 }
 
@@ -16,13 +16,13 @@ const ItemNota = (props: ItemNotaProps) => {
     return(
         <View style={styles.card}>
             <View style={styles.dados_card}>
-                <Text style={{fontSize: 35}}>
+                <Text style={{fontSize: 35, fontWeight: '600'}}>
                     {props.numero+1 + ' - ' + props.atendimento.nome}
                 </Text>
-                <Text style={{ fontSize: 20 }}>{props.atendimento.exame}</Text>
+                <Text style={{ fontSize: 20, fontWeight: '900' }}>{props.atendimento.exame}</Text>
             </View>
 
-        <View style={styles.botao_alterar}>
+        {/* <View style={styles.botao_alterar}>
             <Pressable
             onPress={() => props.onAlterar(props.atendimento.id!)}>
                 <Text style={styles.texto_botao_card}>
@@ -30,15 +30,16 @@ const ItemNota = (props: ItemNotaProps) => {
                 </Text>
             </Pressable>
         </View>
+        */}
 
         <View style={styles.botao_excluir}>
             <Pressable
             onPress={() => props.onDeletar(props.atendimento.id!)}>
                 <Text style={styles.texto_botao_card}>
-                ☒
+                Deletar
                 </Text>
             </Pressable>
-        </View>
+        </View> 
 
         </View>
     )
@@ -72,36 +73,39 @@ const TelaConAtendi = ({ navigation, route }: TelaConAtendimentoProps) => {
         return () => subscribe();
     }, []);
 
-    function deletarNota(id: string) {
-        setIsCarregando(true);
+      function deletarNota(id: string) {
+          setIsCarregando(true);
 
-        firestore()
-        .collection('Atendimento')
-        .doc(id)
-        .delete()
-        .then(() => {
-            Alert.alert("Atendimento", "Removido com sucesso!")
-        })
-        .catch((error) => console.log(error))
-        .finally(() => setIsCarregando(false));
-    }
+          firestore()
+          .collection('Atendimento')
+          .doc(id)
+          .delete()
+          .then(() => {
+              Alert.alert("Atendimento", "Removido com sucesso!")
+          })
+          .catch((error) => console.log(error))
+          .finally(() => setIsCarregando(false));
+      }
     
-    function alterarNota(id: string) {
-        navigation.navigate("TelaAltClientes", { id: id})
-    }
+    //  function alterarNota(id: string) {
+    //      navigation.navigate("TelaAltAtendi", { id: id})
+    //  }
 
     return (
-        <View style={styles.container} >
+        <ImageBackground source={require ("../imagens/PaisagemConAtendimento.jpg")} style={styles.container} >
             <Carregamento isCarregando={isCarregando}/>
-            <Text style={styles.titulo}>Listagem de Atendimentos</Text>
+            <Text style={styles.titulo}>Consulta de Atendimentos</Text>
             <FlatList 
             data={atendimento}
             renderItem={(info) => 
-                <ItemNota numero={info.index} atendimento={info.item} onAlterar={alterarNota} onDeletar={deletarNota}/>}>
+                <ItemNota numero={info.index} atendimento={info.item}
+                //onAlterar={alterarNota} 
+                onDeletar={deletarNota}
+                />}>
 
             </FlatList>
 
-        </View>
+        </ImageBackground>
     )
 }
 
@@ -112,7 +116,6 @@ export default TelaConAtendi;
 const styles =StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: '#FFFACD'
     },
     card: {
         borderWidth: 2,
@@ -121,10 +124,10 @@ const styles =StyleSheet.create({
         borderRadius: 10,
         padding: 3,
         flexDirection: 'row',
-        backgroundColor: 'white'
+        backgroundColor: '#fff'
     },
     dados_card:{
-        flex: 1
+        flex: 1,
     },
     botao_alterar:{
         backgroundColor: 'green',
@@ -133,19 +136,24 @@ const styles =StyleSheet.create({
         alignItems: 'center'
     },
     texto_botao_card:{
-        fontSize: 50,
+        fontSize: 20,
+        fontWeight: '600',
         right: -2,
         color: 'black'
     },
     botao_excluir:{
-        backgroundColor: 'red',
-        width: 55,
+        backgroundColor: '#B22222',
+        width: 80,
+        borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
     titulo:{
-        fontSize:40,
+        marginTop: 40,
+        marginBottom: 20,
+        fontSize:30,
         textAlign:'center',
-        color:'black'
+        color:'white',
+        fontWeight: '700'
     }
 });

@@ -34,8 +34,17 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
             ...resultado.data()
         } as IClientes;
 
-        setCliente(cliente.cliente);
-        setAtendimento(cliente.atendimento);
+        setNome(cliente.nome);
+        setDataNasc(cliente.dataNasc);
+        setRua(cliente.rua);
+        setNumero(cliente.numero);
+        setBairro(cliente.bairro);
+        setCidade(cliente.cidade);
+        setEstado(cliente.estado);
+        setComplemento(cliente.complemento);
+        setEmail(cliente.email);
+        setSenha(cliente.senha);
+        setConfirmaSenha(cliente.senha); // Defina isso conforme necessário
         setIsCarregando(false);
     }
 
@@ -52,11 +61,10 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
         .doc(id)
         .update({
             cliente,
-            atendimento,
             created_at: firestore.FieldValue.serverTimestamp()
         })
         .then(() => {
-            Alert.alert("CLiente", "Alterad com sucesso")
+            Alert.alert("CLiente", "Alterado com sucesso")
             navigation.goBack();
         })
         .catch((error) => console.log(error)) 
@@ -165,55 +173,55 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
     }
 
     return(
-        <ImageBackground source={require ("../imagens/papel.jpg")} style={styles.container}>
+        <ImageBackground source={require ("../imagens/PaisagemAltClientes.jpg")} style={styles.container}>
             <ScrollView>
                 <Carregamento isCarregando={isCarregando} />
                 <View style={styles.topo}>
-                    <Text style={styles.title}>Cadastro</Text>
+                    <Text style={styles.title}>Alterar Clientes</Text>
                 </View>
                 <View style={styles.container_login}>
 
                     <View style={styles.container_1}>
-                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setNome(text) }} placeholder='Nome' />
+                        <TextInput style={styles.caixa_texto} value={nome} onChangeText={(text) => { setNome(text) }} placeholder='Nome' />
 
-                        <TextInput style={styles.caixa_texto} maxLength={10} keyboardType='numeric' onChangeText={ajustarDataNascimento} value={dataNasc}
+                        <TextInput style={styles.caixa_texto} value={dataNasc} maxLength={10} keyboardType='numeric' onChangeText={ajustarDataNascimento} 
                         placeholder='Data de Nascimento' />
                     </View>
 
                     <View style={styles.container_2}>
-                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setRua(text) }} placeholder='Rua' />
+                        <TextInput style={styles.caixa_texto} value={rua} onChangeText={(text) => { setRua(text) }} placeholder='Rua' />
 
-                        <TextInput style={styles.caixa_texto_numero} maxLength={5} keyboardType='numeric' onChangeText={(text) => { setNumero(text) }} placeholder='Número' />
+                        <TextInput style={styles.caixa_texto_numero} value={numero} maxLength={5} keyboardType='numeric' onChangeText={(text) => { setNumero(text) }} placeholder='Número' />
                     </View>
 
                     <View style={styles.container_3}>
-                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setBairro(text) }} placeholder='Bairro' />
+                        <TextInput style={styles.caixa_texto} value={bairro} onChangeText={(text) => { setBairro(text) }} placeholder='Bairro' />
 
-                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setComplemento(text) }} placeholder='Complemento' />
+                        <TextInput style={styles.caixa_texto} value={complemento} onChangeText={(text) => { setComplemento(text) }} placeholder='Complemento' />
 
                     </View>
 
                     <View style={styles.container_4}>
-                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setCidade(text) }} placeholder='Cidade' />
+                        <TextInput style={styles.caixa_texto} value={cidade} onChangeText={(text) => { setCidade(text) }} placeholder='Cidade' />
 
-                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setEstado(text) }} placeholder='Estado' />
+                        <TextInput style={styles.caixa_texto} value={estado} onChangeText={(text) => { setEstado(text) }} placeholder='Estado' />
 
                     </View>
 
 
-                    <View style={styles.meio}>
-                        <Text style={styles.title}>Conta</Text>
+                    {/* <View style={styles.meio}>
+                        <Text style={styles.subtitle}>Conta</Text>
                     </View>
 
                     <View style={styles.container_5}>
-                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setEmail(text) }} placeholder='Email' />
+                        <TextInput style={styles.caixa_texto} value={email} onChangeText={(text) => { setEmail(text) }} placeholder='Email' />
 
                         <TextInput style={styles.caixa_texto} secureTextEntry={true} onChangeText={(text) => { setSenha(text) }} placeholder='Senha' />
                     </View>
 
                     <View style={styles.container_6}>
                         <TextInput style={styles.caixa_texto} secureTextEntry={true} onChangeText={(text) => { setConfirmaSenha(text) }} placeholder='Confirmar Senha' />
-                    </View>
+                    </View> */}
 
             <Pressable
             style={styles.botao}
@@ -236,15 +244,27 @@ container: {
         // backgroundColor: '#100D28',
     },
     topo: {
+        marginTop: 20,
         flexDirection: 'row',
         height: 70,
     },
     meio: {
+        //backgroundColor: '#4682B4',
         flexDirection: 'row',
         height: 70,
-        marginBottom: 20
+        marginVertical: 10,
+        marginTop: -10,
+        marginBottom: 10,
+        borderRadius: 10,
     },
     title: {
+        color: '#fff',
+        fontSize: 25,
+        fontWeight: 'bold',
+        margin: 20,
+        left: 100,
+    },
+    subtitle: {
         color: '#fff',
         fontSize: 25,
         fontWeight: 'bold',
@@ -296,7 +316,7 @@ container: {
         width: '50%',
         color: 'black',
         borderWidth: 1,
-        borderRadius: 4,
+        borderRadius: 10,
         backgroundColor: 'white',
         marginBottom: 20,
     },
@@ -304,7 +324,7 @@ container: {
         width: '50%',
         color: 'black',
         borderWidth: 1,
-        borderRadius: 4,
+        borderRadius: 10,
         margin: 0,
         backgroundColor: 'white',
         marginBottom: 20,
@@ -313,7 +333,7 @@ container: {
         width: '50%',
         color: 'black',
         borderWidth: 1,
-        borderRadius: 4,
+        borderRadius: 10,
         margin: 0,
         backgroundColor: 'white',
         marginBottom: 20,
@@ -321,16 +341,16 @@ container: {
     },
     botao: {
         justifyContent: 'center',
-        backgroundColor: 'grey',
+        backgroundColor: '#4682B4',
         paddingVertical: 10,
         paddingHorizontal: 50,
         marginHorizontal: 60,
         marginTop: 20,
         elevation: 8,
-        fontWeight: 'bold',
-        borderRadius: 3
+        borderRadius: 10
     },
     desc_botao: {
+        fontWeight: '600',
         fontSize: 20,
         color: 'white',
         alignSelf: 'center'

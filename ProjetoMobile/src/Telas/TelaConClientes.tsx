@@ -26,7 +26,7 @@ const ItemCliente = (props: ItemClienteProps) => {
             <Pressable
             onPress={() => props.onAlterar(props.cliente.id!)}>
                 <Text style={styles.texto_botao_card}>
-                ✎
+                Alterar
                 </Text>
             </Pressable>
         </View>
@@ -35,7 +35,7 @@ const ItemCliente = (props: ItemClienteProps) => {
             <Pressable
             onPress={() => props.onDeletar(props.cliente.id!)}>
                 <Text style={styles.texto_botao_card}>
-                ☒
+                Deletar
                 </Text>
             </Pressable>
         </View>
@@ -90,7 +90,7 @@ const TelaConClientes = ({ navigation, route }: TelaConClienteProps) => {
     } 
 
     return (
-        <ImageBackground source={require ("../imagens/Iphone.jpg")} style={styles.container}>
+        <ImageBackground source={require ("../imagens/PaisagemConClientes.jpg")} style={styles.container}>
             <Carregamento isCarregando={isCarregando}/>
             <Text style={styles.titulo}>Consulta de Clientes</Text>
             <FlatList 
@@ -123,27 +123,31 @@ const styles =StyleSheet.create({
         flex: 1
     },
     botao_alterar:{
-        backgroundColor: 'green',
-        width: 55,
+        backgroundColor: '#2E8B57',
+        width: 80,
+        borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
     texto_botao_card:{
-        fontSize: 50,
+        fontSize: 20,
+        fontWeight: '600',
         right: -2,
         color: 'black'
     },
     botao_excluir:{
-        backgroundColor: 'red',
-        width: 55,
+        backgroundColor: '#B22222',
+        width: 80,
+        borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
     titulo:{
-        marginTop: 30,
-        fontSize:40,
+        marginTop: 40,
+        marginBottom: 20,
+        fontSize:30,
         textAlign:'center',
         color:'white',
-        fontWeight: '900'
+        fontWeight: '700'
     }
 });

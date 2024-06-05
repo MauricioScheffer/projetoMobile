@@ -7,13 +7,15 @@ type IClientes = {
     nome : string,
     cpf: string,
     rua: string,
+    complemento: string,
     numero: string,
     bairro: string
     cidade: string,
     estado: string,
     email: string,
     senha: string,
-    dataNasc: Date,
+    dataNasc: string,
+    cep: string,
     created_at: FirebaseFirestoreTypes.FieldValue
     
 }

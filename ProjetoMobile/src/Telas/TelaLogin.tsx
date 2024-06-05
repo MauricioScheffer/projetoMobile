@@ -58,7 +58,7 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
 
     return (
 
-      <ImageBackground source={require ("../imagens/Iphone.jpg")} style={styles.container}>
+      <ImageBackground source={require ("../imagens/PaisagemInicio.jpg")} style={styles.container}>
             
              <View style={styles.container_login}>
                <Text
@@ -90,7 +90,6 @@ const TelaLogin = ({ navigation, route }: LoginProps) => {
                     onPress={(redefinirSenha)}>
                     <Text style={styles.desc_botao}>Esqueceu sua senha?</Text>
                 </Pressable>
-
             </View>
         </ImageBackground>
     );
@@ -109,6 +108,7 @@ const styles = StyleSheet.create({
         gap: 5
     },
     titulo_caixa_texto:{
+        elevation: 8,
         left: -120,
         fontFamily: 'Jacquard',
         fontWeight: 'bold',
@@ -120,22 +120,22 @@ const styles = StyleSheet.create({
         width: '75%',
         color: 'black',
         fontWeight: '600',
-        borderWidth: 3,
         margin: 3,
         backgroundColor: 'white'
     },
     botao1: {
         elevation: 8,
         justifyContent: 'center',
-        backgroundColor: 'grey',
+        backgroundColor: '#4682B4',
         paddingVertical: 10,
         paddingHorizontal: 120,
         marginTop: 40,
     },
     botao2: {
+        //left: -50,
         elevation: 8,
         justifyContent: 'center',
-        backgroundColor: 'light grey',
+        backgroundColor: 'light',
         paddingVertical: 10,
         paddingHorizontal: 50,
         marginTop: 20,
