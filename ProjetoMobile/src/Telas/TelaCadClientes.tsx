@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert, ImageBackground, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert, ImageBackground, ScrollView, Button } from 'react-native';
 
 import auth from "@react-native-firebase/auth";
 import { CadClienteProps } from '../navigation/HomeNavigator';
 import Carregamento from '../Carregamento'
 import firestore from '@react-native-firebase/firestore';
+import { Eye, EyeOff} from "lucide-react";
 
 const TelaCadClientes = ({ navigation, route }: CadClienteProps) => {
     const [nome, setNome] = useState('');
@@ -147,7 +148,7 @@ const TelaCadClientes = ({ navigation, route }: CadClienteProps) => {
         } if (cpf == '') {
             Alert.alert("CPF em branco", "Digite um CPF")
             return false;
-        } if (!(validarCPF)) {
+        } if (!validarCPF()) {
             Alert.alert("CPF Inválido", "Digite um CPF válido")
             return false;
         } if (rua == '') {
@@ -198,9 +199,9 @@ const TelaCadClientes = ({ navigation, route }: CadClienteProps) => {
     }
 
     return (
-        <ImageBackground source={require ("../imagens/papel.jpg")} style={styles.container}>
-            <ScrollView>
-                <Carregamento isCarregando={isCarregando} />
+        <ImageBackground source={require ("../imagens/PaisagemCadClientes.jpg")} style={styles.container}>
+                <ScrollView>
+               <Carregamento isCarregando={isCarregando} />
                 <View style={styles.topo}>
                     <Text style={styles.title}>Cadastro</Text>
                 </View>
@@ -222,7 +223,7 @@ const TelaCadClientes = ({ navigation, route }: CadClienteProps) => {
                     <View style={styles.container_3}>
                         <TextInput style={styles.caixa_texto_numero} maxLength={5} keyboardType='numeric' onChangeText={(text) => { setNumero(text) }} placeholder='Número' />
 
-                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setBairro(text) }} placeholder='Bairro' />
+                        <TextInput style={styles.caixa_texto} value={bairro} onChangeText={(text) => { setBairro(text) }} placeholder='Bairro' />
                     </View>
 
                     <View style={styles.container_4}>
@@ -231,7 +232,7 @@ const TelaCadClientes = ({ navigation, route }: CadClienteProps) => {
                         <TextInput style={styles.caixa_texto} onChangeText={(text) => { setCidade(text) }} placeholder='Cidade' />
                     </View>
 
-                    <TextInput style={styles.caixa_texto_estado} onChangeText={(text) => { setEstado(text) }} placeholder='Estado' />
+                    <TextInput style={styles.caixa_texto_estado} value={estado} onChangeText={(text) => { setEstado(text) }} placeholder='Estado' />
 
                     <View style={styles.meio}>
                         <Text style={styles.title}>Conta</Text>
@@ -254,9 +255,8 @@ const TelaCadClientes = ({ navigation, route }: CadClienteProps) => {
                     </Pressable>
 
                 </View>
-            </ScrollView>
+        </ScrollView>
         </ImageBackground>
-
     );
 }
 
@@ -275,10 +275,12 @@ const styles = StyleSheet.create({
     meio: {
         flexDirection: 'row',
         height: 70,
-        marginBottom: 20
+        marginTop: -10,
+        marginBottom: 10,
     },
     title: {
         color: '#fff',
+        textAlign: 'center',
         fontSize: 25,
         fontWeight: 'bold',
         margin: 20,
@@ -329,7 +331,7 @@ const styles = StyleSheet.create({
         width: '50%',
         color: 'black',
         borderWidth: 1,
-        borderRadius: 4,
+        borderRadius: 10,
         backgroundColor: 'white',
         marginBottom: 20,
     },
@@ -337,7 +339,7 @@ const styles = StyleSheet.create({
         width: '50%',
         color: 'black',
         borderWidth: 1,
-        borderRadius: 4,
+        borderRadius: 10,
         margin: 0,
         backgroundColor: 'white',
         marginBottom: 20,
@@ -346,7 +348,7 @@ const styles = StyleSheet.create({
         width: '50%',
         color: 'black',
         borderWidth: 1,
-        borderRadius: 4,
+        borderRadius: 10,
         margin: 0,
         backgroundColor: 'white',
         marginBottom: 20,
@@ -354,14 +356,14 @@ const styles = StyleSheet.create({
     },
     botao: {
         justifyContent: 'center',
-        backgroundColor: 'grey',
+        backgroundColor: '#4682B4',
         paddingVertical: 10,
         paddingHorizontal: 50,
         marginHorizontal: 60,
-        marginTop: 20,
+        marginTop: 10,
         elevation: 8,
         fontWeight: 'bold',
-        borderRadius: 3
+        borderRadius: 10
     },
     desc_botao: {
         fontSize: 20,

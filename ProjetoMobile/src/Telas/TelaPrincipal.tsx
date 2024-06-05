@@ -7,21 +7,25 @@ import ListaFlat from '../ListaFlat';
 const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
 
     return (
-        <ImageBackground source={require ("../imagens/wallpaper.jpg")} style={styles.container}>
+        <ImageBackground source={require ("../imagens/PaisagemPrincipal.jpg")} style={styles.container}>
 
-            <Text style={styles.titulo}>Bem Vindo!</Text>
+            <Text style={styles.titulo}>Bem Vindo</Text>
+
+            {/* <Text style={styles.subtitulo}>Clientes</Text> */}
+
+            <Pressable
+            style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
+                    onPress={() => {navigation.navigate('TelaCadClientes')}}>
+                    <Text style={styles.desc_botao}>Cadastro de Clientes</Text>
+            </Pressable>
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
                     onPress={() => {navigation.navigate('TelaConClientes')}}>
-                    <Text style={styles.desc_botao}>Lista de Clientes</Text>
+                    <Text style={styles.desc_botao}>Consulta de Clientes</Text>
             </Pressable>
 
-            <Pressable
-            style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('TelaConAtendi')}}>
-                    <Text style={styles.desc_botao}>Alterar</Text>
-            </Pressable>
+            {/* <Text style={styles.subtitulo}>Atendimentos</Text> */}
 
             <Pressable
             style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
@@ -31,9 +35,9 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
 
             <Pressable
                     style={(state) => [styles.botao, state.pressed ? { opacity: 0.5 } : null] }
-                    onPress={() => {navigation.navigate('TelaCadClientes')}}>
-                    <Text style={styles.desc_botao}>Cadastra Clientes</Text>
-             </Pressable>
+                    onPress={() => {navigation.navigate('TelaConAtendi')}}>
+                    <Text style={styles.desc_botao}>Consulta de Atendimento</Text>
+            </Pressable>
 
         </ImageBackground>
     )
@@ -47,23 +51,38 @@ const styles = StyleSheet.create({
         flex: 1,
     },
    titulo: {
-        marginTop: 95,
+        backgroundColor: '#4682B4',
+        marginTop: 80,
+        marginBottom: 60,
         textAlign: 'center',
+        fontWeight: '900',
+        padding: 10,
+        marginHorizontal: 100,
+        borderRadius: 0,
         fontSize: 20,
         color: 'white',
    },
+   subtitulo:{
+    marginTop: 20,
+    textAlign: 'left',
+    marginLeft: 10,
+    fontWeight: '900',
+    fontSize: 20,
+    color: 'white',
+   },
    botao: {
     elevation: 10,
-    backgroundColor: 'grey',
+    backgroundColor: '#4682B4',
     alignItems: 'center',
     width: 300,
     marginLeft: 45,
-    borderRadius: 3,
+    borderRadius: 10,
     padding: 20,
-    marginTop: 20
+    marginTop: 20,
 },
 desc_botao: {
     fontSize: 20,
     color: '#fff',
+    fontWeight: '600',
 }
 });
