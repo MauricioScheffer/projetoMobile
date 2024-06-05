@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Pressable, Image, Alert } from 'react-native';
+import { StyleSheet, Text, Pressable, ImageBackground } from 'react-native';
 
 import { PrincipalProps } from '../navigation/HomeNavigator';
 import ListaFlat from '../ListaFlat';
 
 const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
+
     return (
-        <View style={styles.container}>
+        <ImageBackground source={require ("../imagens/wallpaper.jpg")} style={styles.container}>
+
             <Text style={styles.titulo}>Bem Vindo!</Text>
 
             <Pressable
@@ -33,10 +35,7 @@ const TelaPrincipal = ({ navigation, route }: PrincipalProps) => {
                     <Text style={styles.desc_botao}>Cadastra Clientes</Text>
              </Pressable>
 
-             
-
-           {/* <ListaFlat/> */}
-        </View>
+        </ImageBackground>
     )
     
 }
@@ -46,17 +45,16 @@ export default TelaPrincipal;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFACD'
     },
    titulo: {
-        paddingTop: 50,
+        marginTop: 95,
         textAlign: 'center',
         fontSize: 20,
-        color: '#000',
+        color: 'white',
    },
    botao: {
     elevation: 10,
-    backgroundColor: '#61DBFB',
+    backgroundColor: 'grey',
     alignItems: 'center',
     width: 300,
     marginLeft: 45,

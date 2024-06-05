@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { View, Pressable, FlatList, StyleSheet, Text, Alert } from 'react-native';
+import { View, Pressable, FlatList, StyleSheet, Text, Alert, ImageBackground} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { TelaConClienteProps } from '../navigation/HomeNavigator';
 import Carregamento from '../Carregamento';
@@ -90,15 +90,15 @@ const TelaConClientes = ({ navigation, route }: TelaConClienteProps) => {
     } 
 
     return (
-        <View style={styles.container} >
+        <ImageBackground source={require ("../imagens/Iphone.jpg")} style={styles.container}>
             <Carregamento isCarregando={isCarregando}/>
-            <Text style={styles.titulo}>Listagem de Notas</Text>
+            <Text style={styles.titulo}>Consulta de Clientes</Text>
             <FlatList 
             data={cliente} renderItem={(info) => <ItemCliente numero={info.index} cliente={info.item} onAlterar={alterarCliente} onDeletar={deletarCliente}/>}>
 
             </FlatList>
 
-        </View>
+        </ImageBackground>
     )
 }
 
@@ -109,7 +109,6 @@ export default TelaConClientes;
 const styles =StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: '#FFFACD'
     },
     card: {
         borderWidth: 2,
@@ -141,8 +140,10 @@ const styles =StyleSheet.create({
         alignItems: 'center'
     },
     titulo:{
+        marginTop: 30,
         fontSize:40,
         textAlign:'center',
-        color:'black'
+        color:'white',
+        fontWeight: '900'
     }
 });

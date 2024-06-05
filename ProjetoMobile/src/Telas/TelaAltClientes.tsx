@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {Alert, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Alert, Pressable, StyleSheet, Text, TextInput, View, ScrollView, ImageBackground} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import Carregamento from "../Carregamento";
 import { AltClienteProps } from "../navigation/HomeNavigator";
@@ -10,6 +10,17 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
     const [cliente, setCliente] = useState('');
     const [atendimento, setAtendimento] = useState('');
     const [isCarregando, setIsCarregando] = useState(false);
+    const [nome, setNome] = useState('');
+    const [rua, setRua] = useState('');
+    const [numero, setNumero] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [cidade, setCidade] = useState('');
+    const [estado, setEstado] = useState('');
+    const [complemento, setComplemento] = useState('')
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [confirmaSenha, setConfirmaSenha] = useState('');
+    const [dataNasc, setDataNasc] = useState('');
 
     async function carregar() {
         setIsCarregando(true);
@@ -34,9 +45,10 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
 
     function alterar(){
         setIsCarregando(true);
-
+        
+        if(verificaCampos()){
         firestore()
-        .collection('notas')
+        .collection('Clientes')
         .doc(id)
         .update({
             cliente,
@@ -44,38 +56,164 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
             created_at: firestore.FieldValue.serverTimestamp()
         })
         .then(() => {
-            Alert.alert("Nota", "Alterad com sucesso")
+            Alert.alert("CLiente", "Alterad com sucesso")
             navigation.goBack();
         })
         .catch((error) => console.log(error)) 
         .finally(() => setIsCarregando(false));
     }
+    }
+
+    const formatarData = (text: string) => {
+        let dataFormatada = text.replace(/\D/g, '');
+
+        if (dataFormatada.length > 2) {
+            dataFormatada = dataFormatada.replace(/^(\d{2})(\d)/g, '$1/$2');
+            if (dataFormatada.length > 5) {
+                dataFormatada = dataFormatada.replace(/^(\d{2})\/(\d{2})(\d)/g, '$1/$2/$3');
+            }
+        }
+
+        return dataFormatada.substring(0, 10);
+    };
+
+    const ajustarDataNascimento = (text: string) => {
+        const dataFormatada = formatarData(text);
+        setDataNasc(dataFormatada);
+    };
+
+
+    // async function cadastrar() {
+    //     setIsCarregando(true);
+
+    //     if (verificaCampos()) {
+    //         firestore()
+    //             .collection('Clientes')
+    //             .add({
+    //                 nome, cpf, rua, numero, bairro, cidade, estado, complemento, email, senha, dataNasc
+    //             })
+    //             .then(() => {
+    //                 Alert.alert("Cliente", "Cadastro com sucesso");
+    //                 setNome(''); setRua(''); setNumero(''); setBairro(''); setCidade(''); setEstado('');
+    //                 setCpf(''); setEmail(''); setSenha('');
+    //                 navigation.navigate('TelaPrincipal')
+    //             })
+    //             .catch((error) => tratarErros(String(error)))
+    //     }
+    //     setIsCarregando(false);
+    // }
+
+    function verificaCampos() {
+        if (nome == '') {
+            Alert.alert("Nome em branco", "Digite um nome")
+            return false;
+        }
+        if (!(/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/.test(nome))) {
+            Alert.alert("Nome Inválido", "Digite um nome válido")
+            return false;
+        } if (dataNasc == '') {
+            Alert.alert("Data de Nascimento em branco", "Digite uma data")
+            return false;
+        } if (!(dataNasc.length == 10)) {
+            Alert.alert("Data de Nascimento Incompleta")
+            return false;
+        } if (rua == '') {
+            Alert.alert("Rua em branco", "Digite sua rua")
+            return false;
+        } if (numero == '') {
+            Alert.alert("Número da Casa em branco", "Digite o número da sua casa")
+            return false;
+        } if (bairro == '') {
+            Alert.alert("Bairro em branco", "Digite seu bairro")
+            return false;
+        } if (cidade == '') {
+            Alert.alert("Cidade em branco", "Digite sua cidade")
+            return false;
+        } if (estado == '') {
+            Alert.alert("Estado em branco", "Digite seu estado")
+            return false;
+        } if (email == '') {
+            Alert.alert("Email em branco", "Digite um email")
+            return false;
+        } if (senha == '') {
+            Alert.alert("Senha em branco", "Digite uma senha")
+            return false;
+        } if (confirmaSenha == '') {
+            Alert.alert("Confirmação de senha em branco", "Digite a confirmção de senha")
+            return false;
+        } if (senha != confirmaSenha) {
+            Alert.alert("Confirmação de senha em branco", "Digite a confirmção de senha")
+            return false;
+        }
+        return true;
+    }
+    //TIRAR ISSO 
+    function tratarErros(erro: string) {
+        console.log(erro);
+        if (erro.includes("[auth/")) {
+            Alert.alert("Formato inválido", "Ex.: 01/01/2000")
+            return false;
+        } if (erro.includes("[auth/invalid-email]")) {
+            Alert.alert("Email inválido", "Digite um email válido")
+        } else if (erro.includes("[auth/weak-password]")) {
+            Alert.alert("Senha Fraca", "A senha digitada é fraca. A senha deve pelo " + "menos 6 dígitos.")
+        } else if (erro.includes("[auth/email-already-in-use]")) {
+            Alert.alert("Email em uso", "O email inserido já foi cadastrado em outra conta.")
+        } else {
+            Alert.alert("Erro", erro)
+        }
+    }
 
     return(
-        <View
-        style={styles.container}>
-            <Carregamento isCarregando={isCarregando}/>
+        <ImageBackground source={require ("../imagens/papel.jpg")} style={styles.container}>
+            <ScrollView>
+                <Carregamento isCarregando={isCarregando} />
+                <View style={styles.topo}>
+                    <Text style={styles.title}>Cadastro</Text>
+                </View>
+                <View style={styles.container_login}>
 
-            <Text style={styles.titulo}>Alterar Nota</Text>
+                    <View style={styles.container_1}>
+                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setNome(text) }} placeholder='Nome' />
 
-            <Text style = {styles.desc_caixa_texto}>
-                Título
-            </Text>
-            <TextInput
-            style={styles.caixa_texto}
-            value={cliente}
-            onChangeText={(text) => { setCliente(text)}}/>
+                        <TextInput style={styles.caixa_texto} maxLength={10} keyboardType='numeric' onChangeText={ajustarDataNascimento} value={dataNasc}
+                        placeholder='Data de Nascimento' />
+                    </View>
 
-            <Text style = {styles.desc_caixa_texto}>
-                    Descrição
-            </Text>
-            <TextInput
-            multiline
-            numberOfLines={4}
-            maxLength={100}
-            style={styles.caixa_texto}
-            value={atendimento}
-            onChangeText={(text) => { setAtendimento(text)}}/>
+                    <View style={styles.container_2}>
+                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setRua(text) }} placeholder='Rua' />
+
+                        <TextInput style={styles.caixa_texto_numero} maxLength={5} keyboardType='numeric' onChangeText={(text) => { setNumero(text) }} placeholder='Número' />
+                    </View>
+
+                    <View style={styles.container_3}>
+                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setBairro(text) }} placeholder='Bairro' />
+
+                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setComplemento(text) }} placeholder='Complemento' />
+
+                    </View>
+
+                    <View style={styles.container_4}>
+                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setCidade(text) }} placeholder='Cidade' />
+
+                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setEstado(text) }} placeholder='Estado' />
+
+                    </View>
+
+
+                    <View style={styles.meio}>
+                        <Text style={styles.title}>Conta</Text>
+                    </View>
+
+                    <View style={styles.container_5}>
+                        <TextInput style={styles.caixa_texto} onChangeText={(text) => { setEmail(text) }} placeholder='Email' />
+
+                        <TextInput style={styles.caixa_texto} secureTextEntry={true} onChangeText={(text) => { setSenha(text) }} placeholder='Senha' />
+                    </View>
+
+                    <View style={styles.container_6}>
+                        <TextInput style={styles.caixa_texto} secureTextEntry={true} onChangeText={(text) => { setConfirmaSenha(text) }} placeholder='Confirmar Senha' />
+                    </View>
 
             <Pressable
             style={styles.botao}
@@ -83,52 +221,118 @@ const TelaAltClientes = ({ navigation, route}: AltClienteProps) => {
             disabled={isCarregando}>
                 <Text style = {styles.desc_botao}>Alterar</Text>
             </Pressable>
-        </View>
+            </View>
+        </ScrollView>
+        </ImageBackground>
     )
 }
 
 export default TelaAltClientes;
 
 const styles = StyleSheet.create ({
-    container: {
+container: {
         flex: 1,
-        backgroundColor: '#FFFACD'
+        flexDirection: 'column',
+        // backgroundColor: '#100D28',
     },
-    titulo:{
-        color: 'black',
-        fontSize: 30,
-        textDecorationStyle: 'solid',
-        textAlign: 'center',
-        paddingBottom: 20,
-        textDecorationLine: 'underline',
-        fontWeight: 'bold',
+    topo: {
+        flexDirection: 'row',
+        height: 70,
     },
-    desc_caixa_texto:{
-        fontSize: 20,
-        fontWeight: 'bold',
-        right: -5
-    },
-
-    caixa_texto:{
-        fontFamily: 'Cochin',
-        fontSize: 18,
-        color: 'black',
-        borderWidth: 3,
+    meio: {
+        flexDirection: 'row',
+        height: 70,
         marginBottom: 20
     },
-    botao:{
-        elevation: 8,
+    title: {
+        color: '#fff',
+        fontSize: 25,
+        fontWeight: 'bold',
+        margin: 20,
+        left: 130
+    },
+    painel_imagem: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    imagem: {
+        width: 200,
+        height: 200
+    },
+    image: {
+        flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#61DBFB',
-        padding: 20,
+    },
+    container_login: {
+        flex: 2,
+        flexDirection: 'column',
+        padding: 15,
+    },
+    container_1: {
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_2: {
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_3: {
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_4: {
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_5: {
+        flexDirection: 'row',
+        gap: 10
+    },
+    container_6: {
+        left: 90
+    },
+    caixa_texto: {
+        width: '50%',
+        color: 'black',
+        borderWidth: 1,
+        borderRadius: 4,
+        backgroundColor: 'white',
+        marginBottom: 20,
+    },
+    caixa_texto_numero: {
+        width: '50%',
+        color: 'black',
+        borderWidth: 1,
+        borderRadius: 4,
+        margin: 0,
+        backgroundColor: 'white',
+        marginBottom: 20,
+    },
+    caixa_texto_estado: {
+        width: '50%',
+        color: 'black',
+        borderWidth: 1,
+        borderRadius: 4,
+        margin: 0,
+        backgroundColor: 'white',
+        marginBottom: 20,
+        left: 90
+    },
+    botao: {
+        justifyContent: 'center',
+        backgroundColor: 'grey',
+        paddingVertical: 10,
+        paddingHorizontal: 50,
+        marginHorizontal: 60,
         marginTop: 20,
-        width: 300,
-        marginLeft: 45,
+        elevation: 8,
+        fontWeight: 'bold',
+        borderRadius: 3
     },
     desc_botao: {
         fontSize: 20,
-        fontWeight: 'bold',
         color: 'white',
-        textAlign: 'center',
+        alignSelf: 'center'
     }
-})
+});
