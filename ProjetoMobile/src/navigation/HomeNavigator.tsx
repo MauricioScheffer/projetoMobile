@@ -8,6 +8,9 @@ import TelaAltClientes from '../Telas/TelaAltClientes';
 import TelaConAtendi from '../Telas/TelaConAtendi';
 import TelaConClientes from '../Telas/TelaConClientes';
 import CadUsuarios from '../Telas/CadUsuarios';
+import TelaRecuperacao from '../Recuperacao/TelaRecuperacao';
+import TelaFibonacci from '../Recuperacao/TelaFibonacci';
+import TelaProduto from '../Recuperacao/TelaProduto';
 
 type RootStackParamList = {
   TelaLogin: undefined;
@@ -18,13 +21,16 @@ type RootStackParamList = {
   TelaConAtendi: undefined;
   TelaConClientes: undefined;
   CadUsuarios: undefined;
+  TelaRecuperacao: undefined;
+  TelaFibonacci: undefined;
+  TelaProduto: {id:string};
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const HomeNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName= "TelaLogin" screenOptions={{headerShown:false}}>
+    <Stack.Navigator initialRouteName= "TelaRecuperacao" screenOptions={{headerShown:false}}>
         <Stack.Screen name="TelaLogin" component={TelaLogin}/>
         <Stack.Screen name="TelaCadClientes" component={TelaCadClientes}/>
         <Stack.Screen name="TelaPrincipal" component={TelaPrincipal}/>
@@ -33,6 +39,9 @@ const HomeNavigator = () => {
         <Stack.Screen name="TelaAltClientes" component={TelaAltClientes}/> 
         <Stack.Screen name="TelaConClientes" component={TelaConClientes}/> 
         <Stack.Screen name="CadUsuarios" component={CadUsuarios}/> 
+        <Stack.Screen name="TelaRecuperacao" component={TelaRecuperacao}/> 
+        <Stack.Screen name="TelaFibonacci" component={TelaFibonacci}/>
+        <Stack.Screen name="TelaProduto" component={TelaProduto}/>
 
       </Stack.Navigator>
   );
@@ -53,6 +62,11 @@ type TelaConClienteProps = NativeStackScreenProps<RootStackParamList, 'TelaConCl
 type TelaConAtendimentoProps = NativeStackScreenProps<RootStackParamList, 'TelaConAtendi'>;
 type AtendimentoProps = NativeStackScreenProps<RootStackParamList, 'TelaCadAtendi'>;
 
+//VOU USAR PRA FAZER A RECUPERAÇÃO
+type RecuperacaoProps = NativeStackScreenProps<RootStackParamList, 'TelaRecuperacao'>;
+type FibonacciProps = NativeStackScreenProps<RootStackParamList, 'TelaFibonacci'>;
+type ProdutoProps = NativeStackScreenProps<RootStackParamList, 'TelaProduto'>;
+
 
 export default HomeNavigator;
-export type {LoginProps, CadUsuariosProps, CadClienteProps, TelaConClienteProps, PrincipalProps, TelaConAtendimentoProps, AtendimentoProps, AltClienteProps};
+export type {LoginProps, CadUsuariosProps, CadClienteProps, TelaConClienteProps, PrincipalProps, TelaConAtendimentoProps, AtendimentoProps, AltClienteProps, RecuperacaoProps, FibonacciProps, ProdutoProps};
